@@ -1,0 +1,223 @@
+{% schema %}
+{
+  "name": "Contacto",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtítulo",
+      "default": "CONTACTO"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "Contáctanos si necesitas más información"
+    },
+    {
+      "type": "header",
+      "content": "Información de contacto"
+    },
+    {
+      "type": "text",
+      "id": "email1",
+      "label": "Correo electrónico"
+    },
+    {
+      "type": "text",
+      "id": "phone1",
+      "label": "Número de teléfono"
+    },
+    {
+      "type": "text",
+      "id": "email2",
+      "label": "Correo electrónico secundario"
+    },
+    {
+      "type": "text",
+      "id": "phone2",
+      "label": "Número de teléfono secundario"
+    },
+    {
+      "type": "text",
+      "id": "address",
+      "label": "Dirección"
+    },
+    {
+      "type": "text",
+      "id": "horario",
+      "label": "Horario"
+    },
+    {
+      "type": "header",
+      "content": "Formulario"
+    },
+    {
+      "type": "textarea",
+      "id": "thankyou",
+      "label": "Mensaje al enviar el formulario",
+      "default": "¡Mensaje enviado correctamente! Pronto te contactaremos."
+    }
+  ]
+}
+{% endschema %}
+<section class="carma-page-contacto py-5" style="background-image:url('{{ '4266.svg' | asset_url }}')">
+  <div class="container my-5 py-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="row justify-content-between gy-5">
+          <div class="col-md-6 col-lg-7">
+            <p class="aqua">{{ section.settings.subtitle }}</p>
+            <h1 class="mb-md-5 pb-5">{{ section.settings.title }}</h1>
+            <div class="row gy-3">
+              <div class="col-lg-6">
+                <div class="d-flex align-items-center column-gap-3">
+                  <img width="auto" height="auto" src="{{ '4267.svg' | asset_url }}" class="icon">
+                  <p class="m-0 fw-light">{{ section.settings.email1 }}</p>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="d-flex align-items-center column-gap-3">
+                  <img width="auto" height="auto" src="{{ '4271.svg' | asset_url }}" class="icon">
+                  <p class="m-0 fw-light">{{ section.settings.email2 }}</p>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="d-flex align-items-center column-gap-3">
+                  <img width="auto" height="auto" src="{{ '4268.svg' | asset_url }}" class="icon">
+                  <p class="m-0 fw-light">{{ section.settings.phone1 }}</p>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="d-flex align-items-center column-gap-3">
+                  <img width="auto" height="auto" src="{{ '4268.svg' | asset_url }}" class="icon">
+                  <p class="m-0 fw-light">{{ section.settings.phone2 }}</p>
+                </div>
+              </div>
+            </div>
+            <div class="my-md-5 py-5">
+              <div class="d-flex align-items-center column-gap-3">
+                <img width="auto" height="auto" src="{{ '4269.svg' | asset_url }}" class="icon">
+                <p class="m-0 fw-light">{{ section.settings.address }}</p>
+              </div>
+            </div>
+            <div class="d-flex align-items-center column-gap-3">
+              <img width="auto" height="auto" src="{{ '4270.svg' | asset_url }}" class="icon">
+              <p class="m-0 fw-light">{{ section.settings.horario }}</p>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-5">
+            <div class="form-container p-5 rounded-4 bg-white border">
+              <form
+                method="post"
+                action="/contact#contact_form"
+                id="contact_form"
+                accept-charset="UTF-8"
+                class="contact-form"
+              >
+                <input type="hidden" name="form_type" value="contact">
+                <input type="hidden" name="utf8" value="✓">
+
+                <div class="row mb-5 gy-5">
+                  <div class="col-md-6">
+                    <label for="ContactFormName" class="form-label">Nombre*</label>
+                    <input type="text" class="form-control" id="ContactFormName" name="contact[name]" required>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="ContactFormLastname" class="form-label">Apellidos*</label>
+                    <input type="text" class="form-control" id="ContactFormLastname" name="contact[apellido]" required>
+                  </div>
+                </div>
+
+                <div class="row mb-5 gy-5">
+                  <div class="col-lg-6">
+                    <label for="ContactFormEmail" class="form-label">Correo electrónico*</label>
+                    <input type="email" class="form-control" id="ContactFormEmail" name="contact[email]" required>
+                  </div>
+                  <div class="col-lg-6">
+                    <label for="ContactFormPhone" class="form-label">Teléfono*</label>
+                    <input type="tel" class="form-control" id="ContactFormPhone" name="contact[phone]" required>
+                  </div>
+                </div>
+
+                <div class="mb-5">
+                  <label for="ContactFormSubject" class="form-label">Asunto</label>
+                  <select class="form-select" id="ContactFormSubject" name="contact[asunto]">
+                    <option value="">Seleccionar</option>
+                    <option value="Consulta">Consulta</option>
+                    <option value="Soporte">Soporte</option>
+                    <option value="Otro">Otro</option>
+                  </select>
+                </div>
+
+                <div class="mb-5">
+                  <label for="ContactFormBody" class="form-label">Escribe un mensaje</label>
+                  <textarea
+                    class="form-control"
+                    id="ContactFormBody"
+                    name="contact[body]"
+                    rows="5"
+                    placeholder="Mensaje"
+                  ></textarea>
+                </div>
+
+                <button type="submit" class="boton black">Enviar mensaje &rarr;</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var form = document.getElementById('contact_form');
+    var submitBtn = form.querySelector('button[type="submit"]');
+
+    // Crea el aviso de éxito usando Bootstrap
+    var successAlert = document.createElement('div');
+    successAlert.className = 'alert alert-success alert-dismissible fade show mt-4 d-none';
+    successAlert.setAttribute('role', 'alert');
+    successAlert.innerHTML = `
+    {{- section.settings.thankyou -}}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  `;
+    form.parentNode.insertBefore(successAlert, form.nextSibling);
+
+    // Mostrar aviso si viene de Shopify por parámetro en la URL
+    if (window.location.search.indexOf('contact_posted=true') !== -1) {
+      successAlert.classList.remove('d-none');
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      // Cambia el texto y deshabilita el botón
+      submitBtn.disabled = true;
+      var originalText = submitBtn.textContent;
+      submitBtn.textContent = 'Enviando...';
+
+      var formData = new FormData(form);
+
+      fetch(form.action, {
+        method: 'POST',
+        headers: { Accept: 'text/html' },
+        body: formData,
+      })
+        .then(function (response) {
+          if (response.ok) {
+            form.reset();
+            successAlert.classList.remove('d-none');
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalText;
+          } else {
+            form.submit();
+          }
+        })
+        .catch(function () {
+          form.submit();
+        });
+    });
+  });
+</script>

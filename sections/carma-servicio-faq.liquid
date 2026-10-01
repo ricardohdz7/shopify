@@ -1,0 +1,67 @@
+{% schema %}
+{
+  "name": "Preguntas frecuentes",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "default": "Preguntas frecuentes",
+      "label": "Título"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Pregunta",
+      "type": "pregunta",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título"
+        },
+        {
+          "type": "textarea",
+          "id": "respuesta",
+          "label": "Respuesta"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+<section class="carma-servicio-faq mb-sm-5 mt-5 py-5">
+  <div class="container my-lg-5 py-lg-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-9">
+        <h2 class="text-center mb-5">{{ section.settings.title }}</h2>
+        <div class="accordion" id="accordionExample">
+          {% for block in section.blocks %}
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button
+                  class="accordion-button fw-medium{% unless forloop.first %} collapsed{% endunless %}"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapse-{{ forloop.index }}"
+                  aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}"
+                  aria-controls="collapse-{{ forloop.index }}"
+                >
+                  {{ block.settings.title }}
+                </button>
+              </h2>
+              <div
+                id="collapse-{{ forloop.index }}"
+                class="accordion-collapse collapse{% if forloop.first %} show{% endif %}"
+                data-bs-parent="#accordionExample"
+              >
+                <div class="accordion-body">
+                  {{ block.settings.respuesta }}
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

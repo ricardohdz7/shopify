@@ -1,0 +1,52 @@
+{% schema %}
+{
+  "name": "Encuentra tu sucursal",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "Encuentra tu sucursal más cercana"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Descripción"
+    },
+    {
+      "type": "text",
+      "id": "button-text",
+      "label": "Texto del botón",
+      "default": "Ver todas las sucursales"
+    },
+    {
+      "type": "url",
+      "id": "button-url",
+      "label": "Enlace del botón"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Imágen"
+    }
+  ]
+}
+{% endschema %}
+<section class="carma-contacto-sucursales my-sm-5 py-sm-5">
+  <div class="container my-5 py-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="row justify-content-between align-items-center gy-5">
+          <div class="col-md-6">
+            <h1 class="mb-5">{{ section.settings.title }}</h1>
+            <p class="mb-5 fw-light">{{ section.settings.text }}</p>
+            <a href="{{ section.settings.button-url }}" class="boton black">{{ section.settings['button-text'] }}</a>
+          </div>
+          <div class="col-md-6 col-lg-auto">
+            <img width="100%" height="auto" src="{{ section.settings.image | image_url }}" class="rounded-4 image">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,47 @@
+{% schema %}
+{
+  "name": "Nuestra historia",
+  "settings": [
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Vídeo"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "NUESTRA HISTORIA"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtítulo",
+      "default": "Casa Muñoz, fundada en 1947"
+    },
+    {
+      "type": "textarea",
+      "id": "descripcion",
+      "label": "Descripción"
+    }
+  ]
+}
+{% endschema %}
+<section class="carma-sobre-nosotros-historia py-5" style="background-image: url({{ '4375.svg' | asset_url }})">
+  <div class="my-sm-5 py-sm-5 container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="row justify-content-between gy-5 align-items-center">
+          <div class="col-sm-5 order-2 order-sm-1">
+            {% render 'carma-video', video: section.settings.video %}
+          </div>
+          <div class="col-sm-7 col-md-6 order-1 order-sm-2">
+            <p class="aqua">{{ section.settings.title }}</p>
+            <h1 class="mb-5 fw-semibold">{{ section.settings.subtitle }}</h1>
+            <div class="descripcion">{{ section.settings.descripcion | newline_to_br }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

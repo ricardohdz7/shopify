@@ -1,0 +1,63 @@
+{% schema %}
+{
+  "name": "Baner",
+  "presets": [
+    {
+      "name": "Baner"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "baner",
+      "name": "Baner",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Seleccionar imagen para escritorio"
+        },
+        {
+          "type": "image_picker",
+          "id": "movil",
+          "label": "Seleccionar imagen para móviles"
+        },
+        {
+          "type": "url",
+          "id": "enlace",
+          "label": "Enlace"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+<div class="swiper baner">
+  <div class="swiper-wrapper">
+    {% for block in section.blocks %}
+      <div class="swiper-slide">
+        <a href="{{ block.settings.enlace }}">
+          <picture>
+            {%- if block.settings.movil != blank -%}
+              <source
+                media="(max-width: 767px)"
+                srcset="{{ block.settings.movil | image_url }}"
+              >
+            {%- endif -%}
+            {%- if block.settings.image != blank -%}
+              <img
+                src="{{ block.settings.image | image_url }}"
+                alt=""
+                class="img-fluid"
+                loading="lazy"
+                width="100%"
+                height="auto"
+              >
+            {%- endif -%}
+          </picture>
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+  <div class="swiper-button-next"></div>
+  <div class="swiper-button-prev"></div>
+</div>

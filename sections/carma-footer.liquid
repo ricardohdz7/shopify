@@ -1,0 +1,339 @@
+{% schema %}
+{
+  "name": "Pié de página",
+  "presets": [
+    {
+      "name": "Pié de página"
+    }
+  ],
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "text",
+      "id": "newsletter",
+      "label": "Título newsletter",
+      "default": "Obtén un 10% de descuento en tu primera compra"
+    },
+    {
+      "type": "text",
+      "id": "copyright",
+      "label": "Copyright",
+      "default": "Todos los derechos reservados 2025 © Casa Muñoz Medi Pedi"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menú"
+    },
+    {
+      "type": "header",
+      "content": "Redes sociales"
+    },
+    {
+      "type": "url",
+      "id": "facebook",
+      "label": "Facebook"
+    },
+    {
+      "type": "url",
+      "id": "instagram",
+      "label": "Instagram"
+    },
+    {
+      "type": "url",
+      "id": "tiktok",
+      "label": "Tiktok"
+    },
+    {
+      "type": "url",
+      "id": "linkedin",
+      "label": "Linkedin"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "menu",
+      "name": "Menú",
+      "settings": [
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Seleccionar menú"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+<footer class="carma-footer text-white pt-5" style="background-image: url('{{ '4223.svg' | asset_url }}')">
+  <div class="container pt-5">
+    <div class="row justify-content-between custom-gy">
+      <div class="col-lg-4">
+        <h3 class="mb-5">{{ section.settings.newsletter }}</h3>
+        {% form 'customer', id: 'newsletter-form', novalidate: 'novalidate' %}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          <div class="row">
+            <div class="col-6">
+              <input
+                type="text"
+                name="contact[first_name]"
+                placeholder="Nombre"
+                class="form-control mb-4"
+                required
+                autocomplete="given-name"
+              >
+            </div>
+            <div class="col-6">
+              <input
+                type="text"
+                name="contact[last_name]"
+                placeholder="Apellido"
+                class="form-control mb-4"
+                required
+                autocomplete="family-name"
+              >
+            </div>
+          </div>
+          <input
+            type="email"
+            name="contact[email]"
+            class="form-control mb-4"
+            placeholder="Email"
+            required
+            autocomplete="email"
+          >
+          <button type="submit" class="btn btn-dark w-100">ENVIAR</button>
+        {% endform %}
+        <div
+          id="newsletter-success"
+          class="alert alert-success alert-dismissible fade show mt-2"
+          style="display: none;"
+          role="alert"
+          aria-live="polite"
+        >
+          ¡Gracias por suscribirte!
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+        </div>
+      </div>
+      <div class="col-lg-7 d-none d-md-block">
+        <div class="row custom-gy">
+          {% for block in section.blocks %}
+            {% if block.type == 'menu' %}
+              <div class="col-6 col-md">
+                <h5 class="text-uppercase menu-title mb-5">{{ block.settings.menu.title }}</h5>
+                <ul class="list-unstyled">
+                  {% for link in block.settings.menu.links %}
+                    <li class="mt-4">
+                      <a href="{{ link.url }}" class="text-white text-decoration-none menu-link">{{ link.title }}</a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    <div class="row align-items-center mt-5 row-gap-4 text-center text-md-start d-none d-md-flex">
+      <div class="col-md">
+        <img
+          src="{{ section.settings.logo | image_url }}"
+          alt="Logo"
+          class="logo"
+          width="auto"
+          height="auto"
+        >
+      </div>
+      <div class="col-md-auto">
+        <img src="{{ '4564.svg' | asset_url }}" width="100%" height="auto" class="cards">
+      </div>
+    </div>
+  </div>
+  <div class="d-md-none mt-5">
+    <div class="accordion footerAccordionMobile" id="footerAccordionMobile-{{ section.id }}">
+      {% for block in section.blocks %}
+        {% if block.type == 'menu' and block.settings.menu != blank and forloop.last == false %}
+          {%- assign collapse_id = 'footerMobileMenu-' | append: section.id | append: '-' | append: forloop.index -%}
+          <div class="accordion-item" {{ block.shopify_attributes }}>
+            <h2 class="accordion-header" id="heading-{{ collapse_id }}">
+              <button
+                class="accordion-button collapsed menu-title text-white"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#{{ collapse_id }}"
+                aria-expanded="false"
+                aria-controls="{{ collapse_id }}"
+              >
+                {{ block.settings.menu.title }}
+              </button>
+            </h2>
+
+            <div
+              id="{{ collapse_id }}"
+              class="accordion-collapse collapse"
+              aria-labelledby="heading-{{ collapse_id }}"
+              data-bs-parent="#footerAccordionMobile-{{ section.id }}"
+            >
+              <div class="accordion-body pt-0">
+                <ul class="list-unstyled mb-0">
+                  {% for link in block.settings.menu.links %}
+                    <li class="mt-3">
+                      <a href="{{ link.url }}" class="text-white text-decoration-none menu-link">{{ link.title }}</a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+  <section class="container d-md-none">
+    <img
+      src="{{ section.settings.logo | image_url }}"
+      alt="Logo"
+      class="logo my-5"
+      width="auto"
+      height="auto"
+    >
+    <div class="d-flex column-gap-5 row-gap-3 flex-wrap">
+      {% if section.settings.menu and section.settings.menu.links.size > 0 %}
+        {% for link in section.settings.menu.links %}
+          <a href="{{ link.url }}" class="text-white">{{ link.title }}</a>
+        {% endfor %}
+      {% endif %}
+    </div>
+    <div class="row align-items-center my-5">
+      <div class="col">
+        <img src="{{ '4564.svg' | asset_url }}" width="100%" height="auto" class="cards">
+      </div>
+      <div class="col-auto">
+        <div class="d-flex column-gap-4">
+          {% if section.settings.facebook != blank %}
+            <a href="{{- section.settings.facebook -}}" target="_blank" rel="noopener noreferrer">
+              <img src="{{ '5738.svg' | asset_url }}" width="auto" height="auto">
+            </a>
+          {% endif %}
+
+          {% if section.settings.instagram != blank %}
+            <a href="{{- section.settings.instagram -}}" target="_blank" rel="noopener noreferrer">
+              <img src="{{ '5739.svg' | asset_url }}" width="auto" height="auto">
+            </a>
+          {% endif %}
+
+          {% if section.settings.tiktok != blank %}
+            <a href="{{- section.settings.tiktok -}}" target="_blank" rel="noopener noreferrer">
+              <img src="{{ '5740.svg' | asset_url }}" width="auto" height="auto">
+            </a>
+          {% endif %}
+
+          {% if section.settings.linkedin != blank %}
+            <a href="{{- section.settings.linkedin -}}" target="_blank" rel="noopener noreferrer">
+              <img src="{{ '5741.svg' | asset_url }}" width="auto" height="auto">
+            </a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="copyright py-4 mt-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-auto order-2 order-lg-1">
+          <p class="m-0 text-center text-lg-start">{{ section.settings.copyright }}</p>
+        </div>
+        <div class="col-lg order-1 order-lg-2 mb-4 mb-lg-0 d-none d-md-block">
+          {% if section.settings.menu and section.settings.menu.links.size > 0 %}
+            <nav class="footer-legal-nav">
+              <ul class="list-inline m-0 d-flex flex-wrap column-gap-5 flex-column flex-sm-row justify-content-lg-end justify-content-center">
+                {% for link in section.settings.menu.links %}
+                  <li class="list-inline-item m-0 text-center">
+                    <a href="{{ link.url }}" class="text-white text-decoration-none">{{ link.title }}</a>
+                  </li>
+                {% endfor %}
+              </ul>
+            </nav>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('newsletter-form');
+    if (!form) return;
+    const btn = form.querySelector('button[type="submit"]');
+    const successMsg = document.getElementById('newsletter-success');
+    const inputs = form.querySelectorAll('input');
+
+    // Resetea el mensaje al empezar (cualquier campo)
+    inputs.forEach(function (inp) {
+      inp.addEventListener('input', function () {
+        if (successMsg) successMsg.style.display = 'none';
+      });
+    });
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      // Deshabilitar botón y cambiar texto
+      const prevText = btn ? btn.textContent : '';
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = 'Enviando...';
+      }
+
+      const data = new FormData(form);
+
+      fetch(form.action, {
+        method: form.method || 'POST',
+        body: data,
+        headers: { Accept: 'application/javascript' },
+      })
+        .then((response) => {
+          if (response.ok) {
+            if (successMsg) successMsg.style.display = 'block';
+            form.reset();
+          } else {
+            // Fallback: envía el form como nativo si falla
+            form.submit();
+          }
+        })
+        .catch(() => {
+          // Fallback ante error
+          form.submit();
+        })
+        .finally(() => {
+          if (btn) {
+            btn.disabled = false;
+            btn.textContent = prevText;
+          }
+        });
+    });
+
+    // Mostrar mensaje de éxito si la URL tiene el parámetro customer_posted=true
+    if (window.location.search.includes('customer_posted=true')) {
+      if (successMsg) successMsg.style.display = 'block';
+    }
+  });
+</script>
+<div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="carModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen-sm-down">
+    <div class="modal-content"></div>
+  </div>
+</div>
+{% style %}
+  @media (max-width: 768px) {
+    .carma-footer {
+      background-image: url('{{ '5737svg' | asset_url }}') !important;
+    }
+  }
+{% endstyle %}

@@ -1,0 +1,23 @@
+{% schema %}
+{
+  "name": "Encabezado",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Imágen de fondo"
+    }
+  ]
+}
+{% endschema %}
+<div
+  class="carma-sobre-nosotros-header py-5 position-relative"
+  style="background-image:url('{{ section.settings.image | image_url }}')"
+>
+  <div class="container my-5 py-5 position-relative z-2">
+    <div class="my-sm-5 py-sm-5">
+      <p class="text-white text-center text-uppercase">{{ page.title }}</p>
+      <div class="h1 text-white text-center fw-semibold">{{ page.content }}</div>
+    </div>
+  </div>
+</div>

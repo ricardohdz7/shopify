@@ -1,0 +1,53 @@
+{% schema %}
+{
+  "name": "Carma header bar",
+  "blocks": [
+    {
+      "type": "add",
+      "name": "Anuncio",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Introducir texto",
+          "default": "30% off en productos hidratantes por tiempo limitado."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Barra de anuncios"
+    }
+  ],
+  "settings": [
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Color de fondo",
+      "default": "#AB4067"
+    }
+  ]
+}
+{% endschema %}
+<!-- Slider main container -->
+<div class="carma-header-bar py-3 position-relative" style="background-color: {{ section.settings.background }}">
+  <div class="container overflow-hidden">
+    <div class="carma-header-swiper">
+      <!-- Additional required wrapper -->
+      <div class="swiper-wrapper">
+        <!-- Slides -->
+        {% for block in section.blocks %}
+          <div class="swiper-slide">
+            <p class="text-center text-white m-0 text-sm px-4 fw-light">
+              {{ block.settings.title }}
+            </p>
+          </div>
+        {% endfor %}
+      </div>
+      <!-- If we need navigation buttons -->
+      <div class="swiper-custom-prev"><img width="auto" height="auto" src="{{ '4185.svg' | asset_url }}"></div>
+      <div class="swiper-custom-next"><img width="auto" height="auto" src="{{ '4186.svg' | asset_url }}"></div>
+    </div>
+  </div>
+</div>

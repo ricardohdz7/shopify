@@ -1,0 +1,52 @@
+{% schema %}
+{
+  "name": "Logos",
+  "settings": [
+    {
+      "type": "color",
+      "id": "color",
+      "label": "Color de fondo",
+      "default": "#484158"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "logo",
+      "name": "Logo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Seleccionar logo"
+        },
+        {
+          "type": "range",
+          "id": "logo_height",
+          "label": "alto del logo",
+          "min": 10,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "default": 50
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+<section
+  class="carma-sobre-nosotros-innovacion-logos marquee py-4"
+  style="background-color: {{ section.settings.color }}"
+>
+  {% for block in section.blocks %}
+    <div class="mx-5 px-sm-5">
+      <img
+        src="{{ block.settings.image | image_url }}"
+        width="100%"
+        loading="lazy"
+        height="{{  block.settings.logo_height }}"
+        class="logo"
+      >
+    </div>
+  {% endfor %}
+</section>

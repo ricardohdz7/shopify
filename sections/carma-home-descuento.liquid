@@ -1,0 +1,54 @@
+{% schema %}
+{
+  "name": "Productos con descuento",
+  "presets": [
+    {
+      "name": "Productos con descuento"
+    }
+  ],
+  "settings": [
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Seleccionar colección"
+    },
+    {
+      "type": "number",
+      "id": "quantity",
+      "label": "Cantidad de productos a mostrar",
+      "default": 9
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Texto del botón",
+      "default": "Ver todos"
+    }
+  ]
+}
+{% endschema %}
+<section class="productos-con-descuento py-5">
+  <div class="py-5 my-md-5 container">
+    <div class="row align-items-end mb-5 pb-3 gy-3">
+      <div class="col-sm">
+        <h1 class="fw-semibold m-0">{{ section.settings.collection.title }}</h1>
+      </div>
+      <div class="col-auto">
+        <a
+          href="{{ section.settings.collection.url }}"
+          class="d-flex align-items-center column-gap-2 text-decoration-none view-all"
+        >
+          <p class="m-0">{{ section.settings.text }}</p>
+          <img width="auto" height="auto" src="{{ '4199.svg' | asset_url }}" class="icon">
+        </a>
+      </div>
+    </div>
+    <div class="row fila">
+      {% for product in collections[section.settings.collection].products limit: section.settings.quantity %}
+        <div class="col-md-6 col-lg-4">
+          {% render 'carma-product-horizontal', product: product %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>

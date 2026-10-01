@@ -1,0 +1,13 @@
+{% if recommendations.products.size > 0 %}
+  <div class="carma-recommendations row">
+    {% for product in recommendations.products %}
+      <div class="col-6 col-md">
+        {% render 'carma-product', product: product %}
+      </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <div class="col-12 text-center">
+    <em>No hay recomendaciones.</em>
+  </div>
+{% endif %}

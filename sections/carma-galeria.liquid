@@ -1,0 +1,52 @@
+{% schema %}
+{
+  "name": "Galería",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "Galería"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "imagen",
+      "name": "Imágen",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Seleccionar imágen"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+<section class="carma-galeria my-5 py-5">
+  <div class="container">
+    <h1 class="mb-5">{{ section.settings.title }}</h1>
+    <div class="galeria swiper">
+      <div class="swiper-wrapper">
+        {% for block in section.blocks %}
+          <div class="swiper-slide">
+            <img
+              src="{{ block.settings.image | image_url }}"
+              width="100%"
+              height="auto"
+              class="rounded w-100"
+            >
+          </div>
+        {% endfor %}
+      </div>
+      <div class="swiper-button-next">
+        <img src="{{ '4241.svg' | asset_url }}" width="auto" height="auto">
+      </div>
+      <div class="swiper-button-prev">
+        <img src="{{ '4240.svg' | asset_url }}" width="auto" height="auto">
+      </div>
+    </div>
+    <div class="swiper-pagination position-relative mt-5"></div>
+  </div>
+</section>

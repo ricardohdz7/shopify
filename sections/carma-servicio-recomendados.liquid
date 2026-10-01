@@ -1,0 +1,47 @@
+{% schema %}
+{
+  "name": "Productos recomendados",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "Extiende el cuidado en tu Hogar"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Producto",
+      "settings": [
+        {
+          "type": "product",
+          "label": "Seleccionar producto",
+          "id": "product"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+<section class="carma-servicio-recomendados mt-sm-5 mb-5 py-5">
+  <div class="container">
+    <h1 class="mb-sm-5 pb-5">{{ section.settings.title }}</h1>
+    <div class="servicio-recomendados swiper">
+      <div class="swiper-wrapper">
+        {% for block in section.blocks %}
+          <div class="swiper-slide">
+            {% assign product = all_products[block.settings.product] %}
+            {% render 'carma-product', product: product %}
+          </div>
+        {% endfor %}
+      </div>
+      <div class="swiper-button-next">
+        <img src="{{ '4241.svg' | asset_url }}" width="auto" height="auto">
+      </div>
+      <div class="swiper-button-prev">
+        <img src="{{ '4240.svg' | asset_url }}" width="auto" height="auto">
+      </div>
+    </div>
+  </div>
+</section>

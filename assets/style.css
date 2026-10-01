@@ -1,0 +1,1614 @@
+.container {
+  width: 100%;
+  max-width: 88%;
+}
+
+.text-sm {
+  font-size: 1vw;
+}
+
+.top-menu {
+  background-color: #f0ebe9;
+}
+.top-menu .absolute-posicionated {
+  position: absolute;
+  width: -moz-max-content;
+  width: max-content;
+  z-index: 10;
+}
+
+body, .carma-sucursales-main-v2 .listado-contenedor .nav-link {
+  font-family: "Sequel Sans Roman Body", sans-serif;
+  font-size: 0.95vw;
+  color: #2e2e2e;
+  letter-spacing: 0px;
+}
+
+.text-sm {
+  font-size: 0.85vw;
+}
+
+.carma-header .navbar-brand img {
+  width: 7vw;
+}
+.carma-header .navbar-toggler:focus {
+  box-shadow: none;
+}
+.carma-header .search-form {
+  border: 1px solid rgba(46, 46, 46, 0.25);
+  border-radius: 7px;
+  overflow: hidden;
+  width: 13.7vw;
+}
+.carma-header .search-form input {
+  border: none;
+  background-color: transparent;
+}
+.carma-header .search-form input:focus {
+  box-shadow: none;
+}
+.carma-header .search-form input::-moz-placeholder {
+  color: #bcbcbc;
+}
+.carma-header .search-form input::placeholder {
+  color: #bcbcbc;
+}
+.carma-header .search-form button {
+  background-color: transparent;
+}
+.carma-header .cart-header {
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 2vw;
+  height: 2vw;
+}
+.carma-header .nav-link {
+  color: #2e2e2e;
+  transition: all 0.3s;
+}
+.carma-header .nav-link:hover {
+  color: #5aadad;
+}
+.carma-header .menu-principal {
+  gap: 2.3vw;
+}
+
+.carma-header-bar {
+  background-color: #ab4067;
+}
+
+.swiper-custom-prev,
+.swiper-custom-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-top: auto;
+  margin-bottom: auto;
+  z-index: 10;
+}
+
+.swiper-custom-next {
+  --bs-gutter-x: 1.5rem;
+  right: calc(6vw + var(--bs-gutter-x) * 0.5);
+}
+
+.features .icon {
+  width: 1.5vw;
+}
+.features .marquee-swiper .swiper-wrapper {
+  transition-timing-function: linear !important;
+}
+.features .marquee-swiper .swiper-wrapper .swiper-slide {
+  width: auto;
+}
+
+.swiper {
+  overflow: hidden;
+  position: relative;
+}
+
+h1, .h1,
+h2,
+.h2,
+h3,
+.carma-post .related-post-column .titulo h2,
+.carma-post .related-post-column .titulo .h2,
+.h3,
+h4,
+.h4,
+h5,
+.h5,
+h6 {
+  font-family: "Montserrat";
+  letter-spacing: -1px;
+}
+
+h1, .h1 {
+  font-size: 3vw;
+}
+
+h2, .h2 {
+  font-size: 2.3vw;
+}
+
+h3, .carma-post .related-post-column .titulo h2, .carma-post .related-post-column .titulo .h2, .h3 {
+  font-size: 2vw;
+}
+
+h4, .h4 {
+  font-size: 1.4vw;
+}
+
+h5, .h5 {
+  font-size: 0.85vw;
+}
+
+a {
+  color: #5aadad;
+}
+
+.list-of-products {
+  background-color: #fdfcfc;
+}
+.list-of-products .icon {
+  width: 0.8vw;
+}
+.list-of-products .view-all {
+  border-bottom: 1px solid #5aadad;
+}
+
+.carma-product-card {
+  height: 100%;
+}
+.carma-product-card .carma-product-card__label {
+  font-size: 0.8vw;
+}
+.carma-product-card .button-add-to-cart {
+  border: 1px solid #707070;
+  background-color: transparent;
+  border-radius: 5px;
+  padding: 0.6vw;
+  transition: all 0.3s;
+  color: #2e2e2e;
+}
+.carma-product-card .button-add-to-cart:hover {
+  background-color: #2e2e2e;
+  color: white;
+}
+
+.custom-gy {
+  --bs-gutter-y: 7rem;
+}
+
+.custom-gx {
+  --bs-gutter-x: 4rem;
+}
+
+.recomendations {
+  background-color: #f55527;
+}
+.recomendations .recomendation-text {
+  padding-left: 6vw;
+  padding-right: 3vw;
+}
+.recomendations .swiper-pagination-bullet {
+  background: white;
+}
+.recomendations .arrows {
+  position: absolute;
+  bottom: 30px;
+  width: 100%;
+  z-index: 10;
+}
+
+.comparison-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1/1;
+  overflow: hidden;
+}
+.comparison-container .comparison-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.comparison-container .comparison-img--after {
+  clip-path: inset(0 0 0 50%);
+  z-index: 2;
+}
+.comparison-container .comparison-slider {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 2px;
+  height: 100%;
+  background: #fff;
+  z-index: 3;
+  cursor: ew-resize;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.comparison-container .comparison-slider span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+  width: 4.5vw;
+  height: 4.5vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #b9b9b9;
+}
+
+.comparison-container,
+.comparison-container *,
+.comparison-container img {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.carma-product-card-horizontal .contenedor {
+  background-color: #fdfcfc;
+}
+.carma-product-card-horizontal .contenedor .icon img {
+  width: 1.9vw;
+}
+.carma-product-card-horizontal .contenedor .carma-product-card__image img {
+  width: 8vw;
+}
+.carma-product-card-horizontal .contenedor .carma-product-card__price--sale {
+  color: #cc2122;
+}
+.carma-product-card-horizontal .contenedor .carma-product-card__label {
+  font-family: "Sequel Sans Light Body", sans-serif;
+}
+
+.productos-con-descuento .fila {
+  --bs-gutter-y: 3vw;
+}
+
+.encuentra-el-producto {
+  background-position: center;
+  background-size: cover;
+}
+.encuentra-el-producto select {
+  width: 100%;
+  border-radius: 0px;
+  border-top-style: none;
+  border-left-style: none;
+  border-right-style: none;
+  color: #808080;
+  font-size: 2vw;
+}
+.encuentra-el-producto select:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+.encuentra-el-producto button {
+  background-color: #2e2e2e;
+  color: white;
+  width: 100%;
+  border: 1px solid #2e2e2e;
+}
+
+.boton, .carma-main-product .add-to-cart-btn {
+  text-decoration: none;
+  display: inline-block;
+  width: auto;
+  padding: 0.6vw 1.3vw;
+  border-radius: 7px;
+}
+.boton.white, .carma-main-product .white.add-to-cart-btn {
+  background-color: white;
+  color: #2e2e2e;
+}
+.boton.black, .carma-main-product .black.add-to-cart-btn {
+  background-color: #2e2e2e;
+  color: white;
+  border-width: 0px;
+}
+.boton.aqua, .carma-main-product .aqua.add-to-cart-btn {
+  color: white;
+  background-color: #5aadad;
+}
+
+.carma-actividad .actividad {
+  background-position: center;
+  background-size: cover;
+}
+.carma-actividad .actividad::before {
+  content: " ";
+  display: block;
+  padding-top: 100%;
+  background: rgba(0, 0, 0, 0.05);
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.35) 0%, rgba(255, 255, 255, 0) 75%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#0000000D", endColorstr="#FFFFFF", GradientType=0);
+}
+.carma-actividad .actividad .content {
+  position: absolute;
+  bottom: 0;
+}
+
+.herramientas .custom-gy {
+  --bs-gutter-y: 5rem;
+}
+.herramientas .fondo {
+  background-position: center;
+  background-size: cover;
+}
+.herramientas .fondo::before {
+  content: " ";
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  z-index: 0;
+  background: #000000;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.6) 0%, rgba(255, 255, 255, 0) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#000000", endColorstr="#FFFFFF", GradientType=0);
+}
+.herramientas .fondo > div {
+  position: relative;
+  z-index: 1;
+}
+
+.carma-video-thumbnail-wrapper {
+  display: inline-block;
+  width: 100%;
+  max-width: 100%;
+  border-radius: 7px;
+  overflow: hidden;
+}
+
+.carma-video-play-btn {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border: none;
+  background: none;
+  cursor: pointer;
+  z-index: 2;
+  padding: 0;
+}
+
+.carma-video-player {
+  position: static;
+  width: 100%;
+  height: auto;
+  background: #000;
+}
+
+.carma-experiencias {
+  line-height: 0;
+}
+.carma-experiencias .carma-producto-snippet {
+  line-height: 1.5;
+}
+.carma-experiencias .carma-producto-snippet .carma-product-card-horizontal .contenedor {
+  background-color: rgba(253, 252, 252, 0.7);
+  backdrop-filter: blur(10px);
+}
+
+.carma-footer {
+  background-color: #38c3d6;
+  background-position: top center;
+  background-size: cover;
+}
+.carma-footer .logo {
+  width: 7vw;
+}
+.carma-footer #newsletter-form .form-control {
+  font-size: 0.95vw;
+  border: none;
+  padding: 0.95vw;
+}
+.carma-footer #newsletter-form .form-control:focus {
+  box-shadow: none;
+}
+.carma-footer #newsletter-form .btn {
+  font-size: 0.95vw;
+  padding: 0.95vw;
+  border: none;
+}
+.carma-footer .menu-link {
+  font-family: "Sequel Sans Light Body", sans-serif;
+}
+.carma-footer .copyright {
+  border-top: 1px dashed rgba(255, 255, 255, 0.5);
+  font-family: "Sequel Sans Light Body", sans-serif;
+}
+.carma-footer .cards {
+  width: 10vw;
+}
+.carma-footer .footerAccordionMobile .accordion-item {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.45);
+  background-color: transparent;
+}
+.carma-footer .footerAccordionMobile .accordion-item:first-child {
+  border-top: 1px solid rgba(255, 255, 255, 0.45);
+}
+.carma-footer .footerAccordionMobile .accordion-item .accordion-button {
+  font-size: 18px;
+  padding-left: calc(6vw + 0.75rem);
+  padding-right: calc(6vw + 0.75rem);
+  background-color: transparent;
+  font-weight: 500;
+}
+.carma-footer .footerAccordionMobile .accordion-item .accordion-button:not(.collapsed) {
+  background-color: transparent;
+  color: #2e2e2e;
+  box-shadow: none;
+}
+.carma-footer .footerAccordionMobile .accordion-item .accordion-button:focus {
+  box-shadow: none;
+}
+.carma-footer .footerAccordionMobile .accordion-item .accordion-button.no-arrow::after {
+  display: none;
+}
+.carma-footer .footerAccordionMobile .accordion-item .accordion-button::after {
+  filter: brightness(0) invert(1);
+}
+.carma-footer .footerAccordionMobile .accordion-item .accordion-body {
+  padding-left: calc(6vw + 0.75rem);
+  padding-right: calc(6vw + 0.75rem);
+}
+
+.megamenu .menu-link {
+  font-family: "Sequel Sans Light Body", sans-serif;
+}
+.megamenu .megamenu-item {
+  position: absolute;
+  width: 100%;
+  top: 0px;
+  overflow: hidden;
+  z-index: 10;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s;
+}
+.megamenu .megamenu-item.show {
+  max-height: 100vh;
+  opacity: 1;
+  transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s;
+}
+
+[id*=carma_header_bar].shopify-section-group-header-group {
+  z-index: 1;
+}
+
+.breadcrumbs {
+  text-transform: uppercase;
+}
+.breadcrumbs a {
+  color: #2e2e2e;
+  text-decoration: none;
+}
+
+.carma-main-collection-banner {
+  background-color: #f7f5f4;
+}
+.carma-main-collection-banner .baner {
+  background-position: center;
+  background-size: cover;
+  min-height: 15vw;
+}
+.carma-main-collection-banner .baner::before {
+  content: " ";
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  z-index: 1;
+  background: #000000;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.6) 0%, rgba(255, 255, 255, 0) 50%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#000000", endColorstr="#FFFFFF", GradientType=1);
+}
+.carma-main-collection-banner .baner-mobile {
+  background-position: center;
+  background-size: cover;
+}
+.carma-main-collection-banner .baner-mobile .overlay {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.carma-main-collection-banner .baner-mobile .overlay .breadcrumbs a {
+  color: white;
+}
+
+.breadcrumbs {
+  font-size: 0.7vw;
+}
+
+.carma-collection-main {
+  background-color: #f7f5f4;
+}
+.carma-collection-main .carma-filters {
+  background-color: white;
+}
+.carma-collection-main .carma-filters .encabezado .icon-filter {
+  width: 1.3vw;
+}
+.carma-collection-main .carma-filters .accordion .accordion-item {
+  border-width: 0px;
+  border-top: 1px solid #e2e2e2;
+  border-radius: 0px;
+}
+.carma-collection-main .carma-filters .accordion .accordion-item .accordion-button {
+  background-color: transparent;
+  box-shadow: none;
+  font-size: 1vw;
+  font-weight: 500;
+  color: black;
+}
+.carma-collection-main .carma-filters .accordion .accordion-item input[type=checkbox] {
+  width: 1em;
+}
+.carma-collection-main .carma-filters .accordion .accordion-item .submenu-link a {
+  color: #2e2e2e;
+  transition: all 0.3s;
+}
+.carma-collection-main .carma-filters .accordion .accordion-item .submenu-link a:hover {
+  color: #5aadad;
+}
+.carma-collection-main .carma-filters .accordion .accordion-item .submenu-link a.active-category {
+  color: #5aadad;
+}
+.carma-collection-main .carma-filters .accordion .accordion-item .form-control {
+  font-size: 0.95vw;
+}
+.carma-collection-main .carma-filters .form-check-label {
+  font-family: "Sequel Sans Light Body", sans-serif;
+}
+.carma-collection-main .facets__form {
+  display: block;
+}
+.carma-collection-main #ProductCount {
+  color: #5aadad;
+}
+.carma-collection-main #SortByDesktop {
+  font-size: 0.95vw;
+  color: #5aadad;
+  border-color: #5aadad;
+}
+.carma-collection-main .contenedor-filtro-y-resultados-movil .btn-filtro {
+  background-color: white;
+}
+.carma-collection-main #modalCollectionFilters .modal-dialog {
+  height: 80%;
+}
+
+.offcanvas-backdrop {
+  display: block !important;
+}
+
+.offcanvas.offcanvas.offcanvas-bottom {
+  height: 80dvh;
+}
+.offcanvas.offcanvas.offcanvas-bottom .offcanvas-header {
+  padding-left: calc(6vw + 0.75rem);
+  padding-right: calc(6vw + 0.75rem);
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgba(204, 204, 204, 0.45);
+}
+.offcanvas.offcanvas.offcanvas-bottom .offcanvas-footer {
+  background-color: #b17bb1;
+  padding: 15px calc(6vw + 0.75rem) 15px calc(6vw + 0.75rem);
+}
+.offcanvas.offcanvas.offcanvas-bottom .offcanvas-footer button {
+  background-color: #263338;
+}
+
+.pagination .page-link {
+  color: black;
+  font-size: 1.5vw;
+  padding: 0px;
+  width: 3.5vw;
+  height: 3.5vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pagination .active > .page-link,
+.pagination .page-link.active {
+  background-color: #2e2e2e;
+  border-color: #2e2e2e;
+  color: white;
+}
+
+.fw-light {
+  font-family: "Sequel Sans Light Body", sans-serif;
+}
+
+.carma-main-product .price {
+  color: #5aadad;
+}
+.carma-main-product .cantidad {
+  border: 1px solid #263338;
+  border-radius: 5px;
+}
+.carma-main-product .cantidad .input-group-text {
+  background-color: transparent;
+  border: none;
+  padding-top: 0.8vw;
+  padding-bottom: 0.8vw;
+}
+.carma-main-product .cantidad .input-group-text.minus {
+  padding-left: 0.8vw;
+  padding-right: 0.4vw;
+}
+.carma-main-product .cantidad .input-group-text.plus {
+  padding-left: 0.4vw;
+  padding-right: 0.8vw;
+}
+.carma-main-product .cantidad .input-group-text img {
+  width: 0.7vw;
+}
+.carma-main-product .cantidad input {
+  max-width: 3vw;
+  font-size: 0.95vw;
+  border: none;
+  background-color: transparent;
+}
+.carma-main-product .add-to-cart-btn {
+  padding-top: 0px;
+  padding-bottom: 0px;
+  height: 100%;
+}
+.carma-main-product .add-to-cart-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.carma-main-product .accordion .accordion-button {
+  padding: 2.5vw 0px;
+  font-size: 0.95vw;
+  color: #2e2e2e;
+}
+.carma-main-product .accordion .accordion-button:not(.collapsed) {
+  background-color: transparent;
+  box-shadow: none;
+}
+.carma-main-product .accordion .accordion-button:focus {
+  box-shadow: none;
+}
+.carma-main-product .accordion .accordion-item:first-of-type {
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  border-left: 0px;
+  border-right: 0px;
+}
+.carma-main-product .accordion .accordion-item:last-of-type {
+  border-left: 0px;
+  border-right: 0px;
+  border-bottom: 0px;
+}
+.carma-main-product .accordion .accordion-body {
+  padding: 0px 0px 2.5vw 0px;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.product-gallery {
+  position: sticky;
+  top: 15px;
+}
+.product-gallery .column-thumbnails {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.product-gallery .imagen-producto {
+  transition: all 0.3s;
+}
+.product-gallery .imagen-producto:not(.featured-image) {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+}
+.product-gallery .imagen-producto:not(.active) {
+  opacity: 0;
+}
+
+#cartModal .modal-dialog {
+  margin: 0 0 0 auto;
+  max-width: 29vw;
+  width: 100vw;
+  height: 100vh;
+  min-height: 100vh;
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+}
+#cartModal .modal-dialog .modal-content {
+  border-radius: 0;
+  border: none;
+  min-height: 100vh;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+#cartModal .modal-dialog .modal-content .modal-footer {
+  border: none;
+  background-color: #86cad2;
+  padding: 1.5vw;
+}
+#cartModal .modal-dialog .modal-content .modal-body {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  padding: 1.5vw;
+}
+#cartModal .modal-dialog .modal-content .modal-header {
+  padding-left: 1.5vw;
+  padding-right: 1.5vw;
+}
+#cartModal .cantidad-del-carrito {
+  color: rgba(46, 46, 46, 0.5);
+}
+#cartModal .cantidad {
+  border: none;
+}
+#cartModal .cart-product {
+  background-color: #fdfcfc;
+}
+#cartModal .cart-product .cart-item__img img {
+  max-width: 100%;
+}
+
+.modal-backdrop.show {
+  display: block !important;
+}
+
+.loading {
+  position: relative;
+  opacity: 0.7;
+  pointer-events: none;
+}
+.loading::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: all;
+  animation: none;
+}
+.loading::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 32px;
+  height: 32px;
+  margin: -16px 0 0 -16px;
+  border-radius: 50%;
+  border: 3px solid #ccc;
+  border-top: 3px solid #222;
+  animation: spin 0.7s linear infinite;
+  z-index: 11;
+}
+
+.carma-sobre-nosotros-header {
+  background-position: center;
+  background-size: cover;
+}
+.carma-sobre-nosotros-header::before {
+  content: " ";
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.16);
+}
+
+.carma-sobre-nosotros-filosofia .titulo {
+  color: #5aadad;
+}
+
+.carma-sobre-nosotros-innovacion {
+  background-size: cover;
+  background-position: bottom;
+}
+.carma-sobre-nosotros-innovacion .texto strong {
+  font-family: "Sequel Sans Roman Body", sans-serif;
+}
+.carma-sobre-nosotros-innovacion .texto p {
+  margin-bottom: 0px;
+}
+
+.carma-sobre-nosotros-innovacion-features {
+  background-color: #484158;
+}
+.carma-sobre-nosotros-innovacion-features .aqua {
+  color: #86cad2;
+}
+
+.marquee {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+  min-height: 1px;
+}
+.marquee .marquee-track,
+.marquee .marquee-track-clone {
+  display: inline-flex;
+  width: -moz-max-content;
+  width: max-content;
+  white-space: nowrap;
+  align-items: center;
+  will-change: transform;
+  transition: none;
+}
+.marquee .marquee-track > *,
+.marquee .marquee-track-clone > * {
+  display: inline-block;
+  vertical-align: top;
+}
+.marquee .marquee-gap {
+  margin-right: 30px;
+}
+
+.aqua {
+  color: #5aadad;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.swiper-pagination-bullet {
+  background: #2e2e2e;
+}
+
+.swiper-button-next:after,
+.swiper-button-prev:after {
+  display: none;
+}
+
+.carma-sobre-nosotros-servicios {
+  background-color: #fdfbfb;
+}
+.carma-sobre-nosotros-servicios .service {
+  width: 6.5vw;
+}
+.carma-sobre-nosotros-servicios .hover {
+  transition: all 0.3s;
+}
+.carma-sobre-nosotros-servicios .hover:hover {
+  color: #5aadad;
+}
+.carma-sobre-nosotros-servicios .icon {
+  width: 0.7vw;
+}
+
+.carma-sobre-nosotros-blog .blog-description {
+  background-color: #f55527;
+}
+.carma-sobre-nosotros-blog .swiper-slide {
+  height: auto;
+}
+
+.carma-servicio-header .contenedor-descripcion {
+  padding-left: 6vw;
+}
+.carma-servicio-header .tarjeta {
+  position: absolute;
+  bottom: 0px;
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  width: 20vw;
+}
+.carma-servicio-header .text-sm {
+  font-size: 0.65vw;
+}
+
+.carma-servicio-descripcion .descripcion strong {
+  font-family: "Sequel Sans Roman Body", sans-serif;
+}
+
+.carma-servicio-necesitas {
+  background-size: cover;
+  background-position: bottom;
+}
+.carma-servicio-necesitas .swiper-slide {
+  width: calc(20% - 7.5px);
+}
+
+.agendar-cita {
+  background-position: center;
+  background-size: cover;
+}
+.agendar-cita::before {
+  content: " ";
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.45);
+}
+
+.carma-servicio-faq .accordion .accordion-button {
+  padding: 2.5vw 0px;
+  font-size: 1.4vw;
+  color: #2e2e2e;
+}
+.carma-servicio-faq .accordion .accordion-button:not(.collapsed) {
+  background-color: transparent;
+  box-shadow: none;
+}
+.carma-servicio-faq .accordion .accordion-button:focus {
+  box-shadow: none;
+}
+.carma-servicio-faq .accordion .accordion-item {
+  border-top: 0px;
+  border-left: 0px;
+  border-right: 0px;
+  border-bottom-color: #707070;
+}
+.carma-servicio-faq .accordion .accordion-item:first-of-type {
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  border-left: 0px;
+  border-right: 0px;
+}
+.carma-servicio-faq .accordion .accordion-item:last-of-type {
+  border-left: 0px;
+  border-right: 0px;
+  border-bottom: 0px;
+}
+.carma-servicio-faq .accordion .accordion-body {
+  padding: 0px 0px 2.5vw 0px;
+  color: rgba(46, 46, 46, 0.6);
+}
+
+.carma-faq-header {
+  background-position: center;
+  background-size: cover;
+  min-height: 25vw;
+}
+.carma-faq-header:before {
+  content: " ";
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.16);
+}
+
+.carma-faq .nav-link {
+  color: rgba(46, 46, 46, 0.56);
+}
+.carma-faq .nav-link.active {
+  color: #5aadad;
+  text-decoration: underline;
+}
+
+.carma-faq-contacto {
+  background-color: #f7f1f6;
+}
+.carma-faq-contacto .imagen {
+  background-position: center;
+  background-size: cover;
+}
+.carma-faq-contacto .text-container {
+  padding: 6vw;
+}
+
+.carma-sucursales-main {
+  background-position: bottom;
+  background-size: cover;
+}
+.carma-sucursales-main .content {
+  padding: 6vw 6vw 0px 6vw;
+}
+.carma-sucursales-main .content .input-group {
+  border: 1px solid rgba(46, 46, 46, 0.75);
+  border-radius: 5px;
+}
+.carma-sucursales-main .content .input-group input {
+  border: none;
+  font-size: 0.95vw;
+}
+.carma-sucursales-main .content .input-group input::-moz-placeholder {
+  color: #bcbcbc;
+}
+.carma-sucursales-main .content .input-group input::placeholder {
+  color: #bcbcbc;
+}
+.carma-sucursales-main .content .input-group input:focus {
+  box-shadow: none;
+}
+.carma-sucursales-main .content .sucursal {
+  border-bottom: 1px solid #707070;
+}
+.carma-sucursales-main .content .sucursal .address {
+  color: #989898;
+}
+
+.carma-blog-card .enlace {
+  color: #767676;
+}
+.carma-blog-card .card-text {
+  color: #767676;
+}
+
+.carma-main-blog .encabezado {
+  background-position: center;
+  background-size: cover;
+}
+.carma-main-blog .encabezado::before {
+  content: " ";
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.16);
+}
+
+.carma-post img {
+  max-width: 100%;
+}
+.carma-post .article-date {
+  color: rgba(0, 0, 0, 0.5);
+}
+.carma-post .article-body {
+  font-family: "Sequel Sans Light Body", sans-serif;
+}
+.carma-post .article-body * {
+  margin-top: 1.7em;
+}
+.carma-post .article-body img {
+  margin: 3em 0px;
+  border-radius: 7px;
+}
+.carma-post .article-body strong {
+  font-family: "Sequel Sans Roman Body", sans-serif;
+}
+.carma-post .related-post-column {
+  background-color: rgba(244, 244, 244, 0.35);
+  border-radius: 7px;
+}
+.carma-post .related-post-column .carma-blog-card {
+  height: 100%;
+}
+.carma-post .related-post-column .carma-blog-card .titulo {
+  flex-grow: 1;
+}
+
+.carma-page-contacto {
+  background-size: cover;
+  background-position: bottom;
+}
+.carma-page-contacto .icon {
+  width: 1vw;
+}
+.carma-page-contacto .form-control,
+.carma-page-contacto .form-select {
+  font-size: 0.95vw;
+}
+
+.carma-contacto-sucursales .image {
+  width: 28vw;
+}
+
+.carma-sobre-nosotros-historia {
+  background-position: bottom;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.carma-sobre-nosotros-personal strong {
+  font-weight: 600;
+}
+
+.carma-servicios .nav-servicios {
+  background-color: #f2f2f2;
+  padding: 0.5vw;
+  border-radius: 10px;
+  position: sticky;
+  top: 15px;
+}
+.carma-servicios .nav-servicios .nav-link {
+  border-radius: 10px;
+  padding: 1.7vw;
+  color: rgba(46, 46, 46, 0.35);
+}
+.carma-servicios .nav-servicios .nav-link.active {
+  background-color: #fafafa;
+  color: #2e2e2e;
+}
+
+.has-submenu {
+  position: relative;
+}
+.has-submenu::after {
+  display: inline-block;
+  margin-left: 0.255em;
+  vertical-align: 0.255em;
+  content: "";
+  border-top: 0.3em solid currentColor;
+  border-right: 0.3em solid transparent;
+  border-left: 0.3em solid transparent;
+}
+.has-submenu[aria-expanded=true]::after {
+  transform: rotate(180deg);
+}
+
+.carma-mobile-menu .logo {
+  width: 100px;
+}
+.carma-mobile-menu .accordion-item {
+  border-left: none;
+  border-right: none;
+}
+.carma-mobile-menu .accordion-item:first-of-type {
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+}
+.carma-mobile-menu .accordion-item:last-of-type {
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+.carma-mobile-menu .accordion-item .accordion-button {
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding-left: 6vw;
+  padding-right: 6vw;
+  background-color: transparent;
+}
+.carma-mobile-menu .accordion-item .accordion-button:focus {
+  box-shadow: none;
+}
+.carma-mobile-menu .accordion-item .accordion-body {
+  padding: 0px;
+}
+.carma-mobile-menu .accordion-item .accordion-body a {
+  color: #2e2e2e;
+}
+.carma-mobile-menu .list-group-item {
+  padding-left: 6vw;
+  padding-right: 6vw;
+}
+.carma-mobile-menu .list-group-item:first-child {
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+}
+.carma-mobile-menu .list-group-item:last-child {
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+.carma-mobile-menu .accordion > .list-group a {
+  color: #2e2e2e;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-family: "Montserrat";
+  font-weight: bold;
+}
+
+.carma-sucursales-main-v2 {
+  background-color: #fdfcfc;
+}
+.carma-sucursales-main-v2 .titular {
+  border-bottom: 1px solid #707070;
+}
+.carma-sucursales-main-v2 .listado-contenedor {
+  background-color: white;
+  padding: 2vw 1.5vw;
+  border-radius: 10px;
+}
+.carma-sucursales-main-v2 .listado-contenedor .nav-link {
+  border-radius: 0px;
+  text-align: left;
+  padding: 0px 1vw;
+  border-left: 4px solid transparent;
+}
+.carma-sucursales-main-v2 .listado-contenedor .nav-link.active {
+  background-color: transparent;
+  border-color: #5aadad;
+  color: #5aadad;
+  font-weight: bold;
+}
+.carma-sucursales-main-v2 .listado-contenedor .separador {
+  height: 1px;
+  background-color: #e0e0e0;
+  display: block !important;
+  background-clip: content-box;
+  padding-left: calc(1vw + 4px);
+  margin: 0.6vw 0px;
+}
+.carma-sucursales-main-v2 .tab-content {
+  padding-left: 4.5vw;
+}
+.carma-sucursales-main-v2 .tab-content .icon {
+  width: 0.9vw;
+}
+
+.service-header {
+  background-color: #86cad2;
+}
+.service-header .go-back .icon {
+  width: 0.45vw;
+}
+.service-header .menu {
+  background-color: white;
+  border-bottom: 1px solid rgba(204, 204, 204, 0.7);
+}
+.service-header .menu .service-menu__logo img {
+  width: 7vw;
+}
+.service-header .menu .service-menu {
+  width: 54%;
+  margin: auto;
+}
+.service-header .menu .service-menu .service-menu__link {
+  color: #171717;
+}
+.service-header .menu .service-menu .service-menu__item:not(.current_link) {
+  font-family: "Sequel Sans Light Body", sans-serif;
+}
+.service-header .menu-movil {
+  border-bottom: 1px solid rgba(204, 204, 204, 0.7);
+}
+.service-header .menu-movil .navbar-brand img {
+  width: 100px;
+}
+
+.carma-mobile-menu-v2 .navbar-brand img {
+  width: 80px;
+}
+.carma-mobile-menu-v2 .icon {
+  width: 22px;
+}
+.carma-mobile-menu-v2 .cart-count {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -40%);
+}
+.carma-mobile-menu-v2 .menu .menu-open {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.carma-mobile-menu-v2 .menu[aria-expanded=false] .menu-open {
+  opacity: 0;
+}
+.carma-mobile-menu-v2 .menu[aria-expanded=true] .menu-open {
+  opacity: 1;
+}
+.carma-mobile-menu-v2 .menu[aria-expanded=true] .menu-closed {
+  opacity: 0;
+}
+.carma-mobile-menu-v2 #collapseMobileMenuV2 {
+  border-top: 1px solid rgba(204, 204, 204, 0.45);
+}
+.carma-mobile-menu-v2 #collapseMobileMenuV2 .accordion-mobile-main .accordion-item {
+  border: none;
+}
+.carma-mobile-menu-v2 #collapseMobileMenuV2 .accordion-mobile-main .accordion-item .accordion-button {
+  font-size: 14px;
+  padding-left: 0px;
+  padding-right: 0px;
+  font-family: "Sequel Sans Semi Bold Body", sans-serif;
+}
+.carma-mobile-menu-v2 #collapseMobileMenuV2 .accordion-mobile-main .accordion-item .accordion-button:not(.collapsed) {
+  background-color: transparent;
+  color: #2e2e2e;
+  box-shadow: none;
+}
+.carma-mobile-menu-v2 #collapseMobileMenuV2 .accordion-mobile-main .accordion-item .accordion-button:focus {
+  box-shadow: none;
+}
+.carma-mobile-menu-v2 #collapseMobileMenuV2 .accordion-mobile-main .accordion-item .accordion-button.no-arrow::after {
+  display: none;
+}
+.carma-mobile-menu-v2 #collapseMobileMenuV2 .accordion-mobile-secondary .accordion-item .accordion-button {
+  font-family: "Sequel Sans Roman Body", sans-serif;
+}
+
+@media (max-width: 991px) {
+  .text-sm {
+    font-size: 12px;
+  }
+  .carma-header .navbar-brand img {
+    width: 100px;
+  }
+  .carma-header .cart-header {
+    width: 27px;
+    height: 27px;
+  }
+  .carma-header .search-form {
+    width: 100%;
+  }
+  .carma-header .menu-principal {
+    gap: 0px;
+    padding-top: 15px;
+  }
+  .carma-header .navbar-collapse {
+    padding-bottom: 15px;
+  }
+  body, .carma-sucursales-main-v2 .listado-contenedor .nav-link {
+    font-size: 14px;
+  }
+  .features .icon {
+    width: 22px;
+  }
+  h1, .h1 {
+    font-size: 30px;
+  }
+  h2, .h2 {
+    font-size: 25px;
+  }
+  h3, .h3, .carma-post .related-post-column .titulo h2, .carma-post .related-post-column .titulo .h2 {
+    font-size: 20px;
+  }
+  h4, .h4 {
+    font-size: 20px;
+  }
+  h5, .h5 {
+    font-size: 12px;
+  }
+  .list-of-products .icon {
+    width: 12px;
+  }
+  .carma-product-card .carma-product-card__label {
+    font-size: 12px;
+  }
+  .carma-product-card .button-add-to-cart {
+    padding: 9px;
+  }
+  .recomendations .recomendation-text {
+    padding-right: 6vw;
+  }
+  .comparison-container {
+    aspect-ratio: 16/9;
+  }
+  .comparison-container .comparison-slider span {
+    width: 70px;
+    height: 70px;
+  }
+  .carma-product-card-horizontal .contenedor .icon img {
+    width: 27px;
+  }
+  .carma-product-card-horizontal .contenedor .carma-product-card__image img {
+    width: 115px;
+  }
+  .productos-con-descuento .fila {
+    --bs-gutter-y: 15px;
+  }
+  .encuentra-el-producto select {
+    font-size: 20px;
+  }
+  .boton, .carma-main-product .add-to-cart-btn {
+    padding: 9px 19px;
+  }
+  .carma-footer .logo {
+    width: 100px;
+  }
+  .carma-footer #newsletter-form .form-control {
+    font-size: 14px;
+    padding: 13px;
+  }
+  .carma-footer #newsletter-form .btn {
+    font-size: 13px;
+    padding: 13px;
+  }
+  .carma-footer .cards {
+    width: 145px;
+  }
+  .breadcrumbs {
+    font-size: 10px;
+  }
+  .carma-collection-main .carma-filters label {
+    font-size: 12px;
+  }
+  .carma-collection-main .carma-filters .accordion .accordion-item .accordion-button {
+    font-size: 14px;
+  }
+  .carma-collection-main .carma-filters .accordion .accordion-item .form-control {
+    font-size: 14px;
+  }
+  .carma-collection-main .carma-filters .encabezado .icon-filter {
+    width: 20px;
+  }
+  .carma-collection-main #SortByDesktop {
+    font-size: 12px;
+  }
+  .carma-main-product .cantidad .input-group-text {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+  .carma-main-product .cantidad .input-group-text.minus {
+    padding-left: 12px;
+    padding-right: 6px;
+  }
+  .carma-main-product .cantidad .input-group-text.plus {
+    padding-left: 6px;
+    padding-right: 12px;
+  }
+  .carma-main-product .cantidad .input-group-text img {
+    width: 11px;
+  }
+  .carma-main-product .cantidad input {
+    max-width: 45px;
+    font-size: 14px;
+  }
+  .carma-main-product .accordion .accordion-button {
+    padding: 36px 0px;
+    font-size: 14px;
+  }
+  .carma-main-product .accordion .accordion-body {
+    padding: 0px 0px 36px 0px;
+  }
+  #cartModal .modal-dialog {
+    max-width: 415px;
+  }
+  #cartModal .modal-dialog .modal-content .modal-body {
+    padding: 25px;
+  }
+  #cartModal .modal-dialog .modal-content .modal-header {
+    padding-left: 25px;
+    padding-right: 25px;
+  }
+  #cartModal .modal-dialog .modal-content .modal-footer {
+    padding: 25px;
+  }
+  .carma-sobre-nosotros-servicios .service {
+    width: 93px;
+  }
+  .carma-sobre-nosotros-servicios .icon {
+    width: 10px;
+  }
+  .carma-sobre-nosotros-servicios .service-link {
+    width: -moz-fit-content;
+    width: fit-content;
+  }
+  .carma-servicio-header .tarjeta {
+    width: auto;
+    margin-right: 4.5rem !important;
+  }
+  .carma-servicio-header .text-sm {
+    font-size: 9px;
+  }
+  .carma-servicio-faq .accordion .accordion-button {
+    padding: 36px 0px;
+    font-size: 20px;
+  }
+  .carma-servicio-faq .accordion .accordion-body {
+    padding: 0px 0px 36px 0px;
+  }
+  .carma-sucursales-main .content .input-group input {
+    font-size: 14px;
+  }
+  .carma-page-contacto .icon {
+    width: 15px;
+  }
+  .carma-page-contacto .form-control,
+  .carma-page-contacto .form-select {
+    font-size: 14px;
+  }
+  .carma-contacto-sucursales .image {
+    width: 100%;
+  }
+  .carma-servicios .nav-servicios {
+    padding: 10px;
+  }
+  .carma-servicios .nav-servicios .nav-link {
+    padding: 25px;
+  }
+  .carma-servicio-necesitas .swiper-slide {
+    width: calc(25% - 7.5px);
+  }
+  .pagination .page-link {
+    font-size: 16px;
+    width: 40px;
+    height: 40px;
+  }
+  .carma-sucursales-main-v2 .tab-content .icon {
+    width: 15px;
+  }
+  .service-header .go-back .icon {
+    width: 7px;
+  }
+  .service-header .menu .service-menu__logo img {
+    width: 100px;
+  }
+  .service-header .menu .service-menu {
+    width: 88%;
+  }
+}
+@media (max-width: 767px) {
+  .carma-main-collection-banner .baner {
+    min-height: 125px;
+  }
+  .carma-main-collection-banner .baner::before {
+    background: #000000;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.6) 0%, rgba(255, 255, 255, 0) 50%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#000000", endColorstr="#FFFFFF", GradientType=0);
+  }
+  .carma-servicio-header .contenedor-descripcion {
+    padding-right: 6vw;
+  }
+  .carma-servicio-header .tarjeta {
+    width: auto;
+    margin-right: 4.5rem !important;
+  }
+  .carma-servicio-header .tarjeta .title-image {
+    font-size: 25px;
+  }
+  .carma-servicio-header .text-sm {
+    font-size: 12px;
+  }
+  .carma-servicio-necesitas .swiper-slide {
+    width: calc(33.33333% - 7.5px);
+  }
+  .carma-sucursales-main-v2 .listado-contenedor {
+    padding: 30px 20px;
+  }
+  .carma-sucursales-main-v2 .listado-contenedor .nav-link {
+    padding: 0px 15px;
+  }
+  .carma-sucursales-main-v2 .listado-contenedor .separador {
+    padding-left: 19px;
+    margin: 10px 0px;
+  }
+  .carma-sucursales-main-v2 .tab-content {
+    padding-left: 0px;
+    padding-top: 30px;
+  }
+}
+@media (max-width: 575px) {
+  #cartModal .modal-dialog {
+    max-width: 100vw;
+  }
+  .carma-servicio-header .tarjeta .title-image {
+    font-size: 14px;
+  }
+  .carma-servicio-header .text-sm {
+    font-size: 9px;
+  }
+  .carma-servicio-faq .accordion .accordion-button {
+    font-size: 16px;
+  }
+  .carma-servicio-necesitas .swiper-slide {
+    width: calc(50% - 7.5px);
+  }
+}/*# sourceMappingURL=style.css.map */

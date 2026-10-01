@@ -1,0 +1,29 @@
+{% schema %}
+{
+  "name": "Filosofía",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "NUESTRA FILOSOFIA"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Descripción",
+      "default": "En Casa Muñoz ofrecemos un cuidado integral, profesional y especializado de manos y pies, que mejora la calidad de vida de nuestros clientes."
+    }
+  ]
+}
+{% endschema %}
+<div class="carma-sobre-nosotros-filosofia py-5">
+  <div class="container my-sm-5 py-5">
+    <p class="text-center mb-4 titulo">{{- section.settings.title -}}</p>
+    <div class="row justify-content-center">
+      <div class="col-lg-9">
+        <h3 class="text-center">{{- section.settings.text -}}</h3>
+      </div>
+    </div>
+  </div>
+</div>

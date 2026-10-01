@@ -1,0 +1,579 @@
+{% schema %}
+{
+  "name": "Encabezado personalizado",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Top menú"
+    },
+    {
+      "type": "link_list",
+      "label": "Seleccionar menú",
+      "id": "top-menu"
+    },
+    {
+      "type": "color",
+      "id": "top-menu-background",
+      "label": "Color de fondo",
+      "default": "#F0EBE9"
+    },
+    {
+      "type": "header",
+      "content": "Menú principal"
+    },
+    {
+      "type": "image_picker",
+      "label": "Logo",
+      "id": "logo"
+    },
+    {
+      "type": "link_list",
+      "label": "Seleccionar menú",
+      "id": "menu"
+    },
+    {
+      "type": "color",
+      "id": "menu-background",
+      "label": "Color de fondo",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Sucursales"
+    },
+    {
+      "type": "text",
+      "id": "title_sucursales",
+      "label": "Título",
+      "default": "Encuentra una tienda"
+    },
+    {
+      "type": "url",
+      "id": "enlace_sucursales",
+      "label": "Enlace"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Encabezado personalizado"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "megamenu",
+      "name": "Megamenú",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Seleccionar imágen"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título (opcional)"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Enlace (opcional)"
+        },
+        {
+          "type": "number",
+          "id": "target",
+          "label": "Elemento del menú objetivo",
+          "placeholder": "1"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Seleccionar menú"
+        },
+        {
+          "type": "header",
+          "content": "Productos favoritos"
+        },
+        {
+          "type": "text",
+          "id": "favorite-title",
+          "label": "Título",
+          "default": "FAVORITOS"
+        },
+        {
+          "type": "product",
+          "id": "product-1",
+          "label": "Producto 1"
+        },
+        {
+          "type": "product",
+          "id": "product-2",
+          "label": "Producto 2"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+<section class="top-menu py-3 d-none d-sm-block" style="background-color:{{ section.settings.top-menu-background }}">
+  <div class="container">
+    <div class="d-flex justify-content-end column-gap-5">
+      {%- if section.settings['top-menu'] != blank -%}
+        {%- for link in linklists[section.settings['top-menu']].links -%}
+          {%- assign has_children = link.links | size -%}
+          <div class="position-relative">
+            <a
+              href="{{ link.url }}"
+              class="text-dark text-decoration-none text-sm{% if has_children > 0 %} has-submenu position-relative{% endif %}"
+              {%- if has_children > 0 -%}
+                data-bs-toggle="collapse" data-bs-target="#collapseTop-{{- forloop.index -}}" aria-expanded="false"
+                aria-controls="collapseTop-{{- forloop.index -}}"
+              {%- endif -%}
+            >
+              {{- link.title -}}
+            </a>
+            {%- if has_children > 0 -%}
+              <div class="collapse absolute-posicionated" id="collapseTop-{{- forloop.index -}}">
+                <div class="list-group submenu" role="menu">
+                  {%- for sublink in link.links -%}
+                    <a href="{{ sublink.url }}" class="list-group-item list-group-item-action">{{ sublink.title }}</a>
+                  {%- endfor -%}
+                </div>
+              </div>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+<nav
+  class="navbar navbar-expand-lg carma-header d-none d-lg-block"
+  style="background-color:{{ section.settings.menu-background }}"
+>
+  <div class="container">
+    <a class="navbar-brand" href="{{ routes.root_url }}">
+      {%- if section.settings.logo != blank -%}
+        <img
+          src="{{ section.settings.logo | img_url: '120x' }}"
+          alt="{{ shop.name }}"
+          width="auto"
+          style="object-fit: contain;"
+          width="auto"
+          height="auto"
+        >
+      {%- else -%}
+        {{ shop.name }}
+      {%- endif -%}
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mx-auto mb-2 mb-lg-0 menu-principal">
+        {%- for link in linklists[section.settings.menu].links -%}
+          {%- assign has_children = link.links | size -%}
+          <li
+            class="nav-item desktop-level"
+            data-hover="{{- forloop.index -}}"
+          >
+            <a
+              class="nav-link {% if has_children > 0 %} has-submenu submenu-mobile{% endif %}"
+              href="{{ link.url }}"
+              data-hover="{{- forloop.index -}}"
+            >
+              {{- link.title -}}
+            </a>
+
+            {%- if has_children > 0 -%}
+              <div class="collapse" id="collapseMobile-{{- forloop.index -}}">
+                <ul class="submenu navbar-nav ps-4" role="menu">
+                  {%- for sublink in link.links -%}
+                    <li class="nav-item">
+                      <a class="nav-link" href="{{ sublink.url }}">{{ sublink.title }}</a>
+                    </li>
+                  {%- endfor -%}
+                </ul>
+              </div>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ul>
+      <form class="d-flex search-form" role="search" action="{{ routes.search_url }}">
+        <div class="input-group input-group-lg">
+          <input
+            type="search"
+            class="form-control"
+            placeholder="Buscar"
+            aria-label="Buscar aqui"
+            aria-describedby="button-addon2"
+            name="q"
+          >
+          <button class="btn" type="submit" id="button-addon2">
+            <img src="{{ '4183.svg' | asset_url }}" width="100%" height="auto">
+          </button>
+        </div>
+      </form>
+      <a
+        href="{{ routes.cart_url }}"
+        class="position-relative cart-header ms-lg-4 mt-3 mt-lg-0 d-flex align-items-end justify-content-center text-decoration-none text-black"
+        style="background-image: url('{{ '4184.svg' | asset_url }}')"
+        data-bs-toggle="modal"
+        data-bs-target="#cartModal"
+      >
+        {% if cart.item_count > 0 %}
+          <span>
+            {{ cart.item_count }}
+            <span class="visually-hidden">productos en el carrito</span>
+          </span>
+        {% endif %}
+      </a>
+    </div>
+  </div>
+</nav>
+<div class="megamenu position-relative d-none d-lg-block">
+  {% for block in section.blocks %}
+    <div class="megamenu-item bg-white position-{{ block.settings.target }}">
+      <div class="container py-5">
+        <div class="row custom-gx">
+          <div class="col-3">
+            <img
+              width="100%"
+              height="auto"
+              src="{{- block.settings.image | image_url -}}"
+              class="rounded"
+            >
+          </div>
+          <div class="col">
+            <p class="text-uppercase mb-4">
+              {% if block.settings.link != blank %}
+                <a href="{{- block.settings.link -}}" class="text-decoration-none">
+              {% endif %}
+              {%- if block.settings.title != blank -%}
+                {{- block.settings.title -}}
+              {%- else -%}
+                {{- block.settings.menu.title -}}
+              {%- endif -%}
+              {% if block.settings.link != blank %}
+                </a>
+              {% endif %}
+            </p>
+            <div class="row">
+              {% for link in block.settings.menu.links %}
+                <div class="col-6">
+                  <p>
+                    <a href="{{ link.url }}" class="text-decoration-none menu-link text-black">
+                      {{- link.title -}}
+                    </a>
+                  </p>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+          <div class="col d-flex flex-column">
+            <p class="mb-4">{{- block.settings['favorite-title'] -}}</p>
+            {% assign product1 = all_products[block.settings['product-1']] %}
+            {% assign product2 = all_products[block.settings['product-2']] %}
+            <div class="d-flex flex-column justify-content-between row-gap-3" style="flex-grow:1">
+              {% if product1 != blank %}
+                {% render 'carma-product-horizontal', product: product1 %}
+              {% endif %}
+
+              {% if product2 != blank %}
+                {% render 'carma-product-horizontal', product: product2 %}
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+{% comment %}
+  <nav class="carma-mobile-menu d-lg-none py-3 navbar">
+    <div class="container">
+      <div class="row align-items-center justify-content-between w-100">
+        <div class="col">
+          <a href="{{ routes.root_url }}">
+            {%- if section.settings.logo != blank -%}
+              <img
+                src="{{ section.settings.logo | image_url }}"
+                alt="{{ shop.name }}"
+                width="auto"
+                width="auto"
+                height="auto"
+                class="logo"
+              >
+            {%- endif -%}
+          </a>
+        </div>
+        <div class="col-auto">
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#view-mobile-menu"
+            aria-controls="view-mobile-menu"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="collapse w-100" id="view-mobile-menu">
+      {% assign mobile_menu = linklists[section.settings.menu] %}
+      {% if mobile_menu and mobile_menu.links.size > 0 %}
+        <div class="pt-3 w-100">
+          <div class="accordion" id="mobileMenuAccordion">
+            {%- assign list_open = false -%}
+            {%- for link in mobile_menu.links -%}
+              {%- assign has_children = link.links | size -%}
+
+              {%- if has_children == 0 -%}
+                {%- unless list_open -%}
+                  {%- assign list_open = true -%}
+                  <ul class="list-group list-group-flush">
+                {%- endunless -%}
+
+                <li class="list-group-item">
+                  <a href="{{ link.url }}" class="text-decoration-none d-block">
+                    {{- link.title -}}
+                  </a>
+                </li>
+              {%- else -%}
+                {%- if list_open -%}
+                  </ul>
+                  {%- assign list_open = false -%}
+                {%- endif -%}
+
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="heading-mobile-{{ forloop.index }}">
+                    <button
+                      class="accordion-button collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapse-mobile-{{ forloop.index }}"
+                      aria-expanded="false"
+                      aria-controls="collapse-mobile-{{ forloop.index }}"
+                    >
+                      {{- link.title -}}
+                    </button>
+                  </h2>
+                  <div
+                    id="collapse-mobile-{{ forloop.index }}"
+                    class="accordion-collapse collapse"
+                    data-bs-parent="#mobileMenuAccordion"
+                  >
+                    <div class="accordion-body p-0">
+                      <ul class="list-group list-group-flush">
+                        {%- for child in link.links -%}
+                          <li class="list-group-item">
+                            <a href="{{ child.url }}" class="text-decoration-none d-block">
+                              {{- child.title -}}
+                            </a>
+                          </li>
+                        {%- endfor -%}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+
+            {%- if list_open -%}
+              </ul>
+            {%- endif -%}
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </nav>
+{% endcomment %}
+<section class="carma-mobile-menu-v2 d-lg-none">
+  <div class="container">
+    <div class="row py-4 align-items-center">
+      <div
+        class="col-auto menu position-relative"
+        data-bs-toggle="collapse"
+        data-bs-target="#collapseMobileMenuV2"
+        aria-expanded="false"
+        aria-controls="collapseMobileMenuV2"
+      >
+        <img src="{{ '5734.svg' | asset_url }}" class="icon menu-closed" width="auto" height="auto">
+        <img src="{{ '5735.svg' | asset_url }}" class="icon menu-open" width="auto" height="auto">
+      </div>
+      <div class="col-auto">
+        <a class="navbar-brand" href="{{ routes.root_url }}">
+          <img
+            src="{{ section.settings.logo | image_url }}"
+            alt="{{ shop.name }}"
+            width="auto"
+            width="auto"
+            height="auto"
+          >
+        </a>
+      </div>
+      <div class="col carma-header">
+        <form class="d-flex search-form" role="search" action="{{ routes.search_url }}">
+          <div class="input-group input-group-lg">
+            <input
+              type="search"
+              class="form-control"
+              placeholder="Buscar"
+              aria-label="Buscar aqui"
+              aria-describedby="button-addon2"
+              name="q"
+            >
+            <button class="btn" type="submit" id="button-addon2">
+              <img src="{{ '4183.svg' | asset_url }}" width="100%" height="auto">
+            </button>
+          </div>
+        </form>
+      </div>
+      <a
+        href="{{ routes.cart_url }}"
+        class="col-auto position-relative cart-header text-black"
+        data-bs-toggle="modal"
+        data-bs-target="#cartModal"
+      >
+        <img src="{{ '5732.svg' | asset_url }}" class="icon" width="auto" height="auto">
+        <span class="cart-count">
+          {{ cart.item_count }}
+          <span class="visually-hidden">productos en el carrito</span>
+        </span>
+      </a>
+    </div>
+  </div>
+  <div class="collapse" id="collapseMobileMenuV2">
+    <div class="container">
+      <div class="accordion accordion-mobile-main my-5" id="accordionMobileMenuV2">
+        {%- assign mobile_menu = linklists[section.settings.menu] -%}
+        {%- if mobile_menu != blank and mobile_menu.links.size > 0 -%}
+          {%- for link in mobile_menu.links -%}
+            {%- assign has_children = link.links | size -%}
+
+            {%- if has_children > 0 -%}
+              {%- assign collapse_id = 'collapseMobileMenuV2-'
+                | append: section.id
+                | append: '-'
+                | append: forloop.index
+              -%}
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#{{ collapse_id }}"
+                    aria-expanded="false"
+                    aria-controls="{{ collapse_id }}"
+                  >
+                    {{- link.title -}}
+                  </button>
+                </h2>
+                <div id="{{ collapse_id }}" class="accordion-collapse collapse" data-bs-parent="#accordionMobileMenuV2">
+                  <div class="accordion-body">
+                    {%- for child in link.links -%}
+                      <div class="accordion-item">
+                        <a class="accordion-header text-decoration-none" href="{{ child.url }}">
+                          <span class="accordion-button no-arrow" type="button">
+                            {{- child.title -}}
+                          </span>
+                        </a>
+                      </div>
+                    {%- endfor -%}
+                  </div>
+                </div>
+              </div>
+            {%- else -%}
+              <div class="accordion-item">
+                <a class="accordion-header text-decoration-none" href="{{ link.url }}">
+                  <span class="accordion-button no-arrow" type="button">
+                    {{- link.title -}}
+                  </span>
+                </a>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endif -%}
+      </div>
+      <div class="accordion accordion-mobile-main accordion-mobile-secondary" id="accordionMobileMenuSecondary">
+        {%- assign mobile_menu = linklists[section.settings['top-menu']] -%}
+        {%- if mobile_menu != blank and mobile_menu.links.size > 0 -%}
+          {%- for link in mobile_menu.links -%}
+            {%- assign has_children = link.links | size -%}
+
+            {%- if has_children > 0 -%}
+              {%- assign collapse_id = 'accordionMobileMenuSecondary-'
+                | append: section.id
+                | append: '-'
+                | append: forloop.index
+              -%}
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#{{ collapse_id }}"
+                    aria-expanded="false"
+                    aria-controls="{{ collapse_id }}"
+                  >
+                    {{- link.title -}}
+                  </button>
+                </h2>
+                <div
+                  id="{{ collapse_id }}"
+                  class="accordion-collapse collapse"
+                  data-bs-parent="#accordionMobileMenuSecondary"
+                >
+                  <div class="accordion-body">
+                    {%- for child in link.links -%}
+                      <div class="accordion-item">
+                        <a class="accordion-header text-decoration-none" href="{{ child.url }}">
+                          <span class="accordion-button no-arrow" type="button">
+                            {{- child.title -}}
+                          </span>
+                        </a>
+                      </div>
+                    {%- endfor -%}
+                  </div>
+                </div>
+              </div>
+            {%- else -%}
+              {% if link.url != section.settings.enlace_sucursales %}
+                <div class="accordion-item">
+                  <a class="accordion-header text-decoration-none" href="{{ link.url }}">
+                    <span class="accordion-button no-arrow" type="button">
+                      {{- link.title -}}
+                    </span>
+                  </a>
+                </div>
+              {% endif %}
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endif -%}
+      </div>
+      <a
+        class="row align-items-center text-black text-decoration-none py-5"
+        href="{{- section.settings.enlace_sucursales -}}"
+      >
+        <div class="col-auto">
+          <img src="{{ '5736.svg' | asset_url }}" width="20" height="auto">
+        </div>
+        <div class="col">
+          <p class="m-0">{{- section.settings.title_sucursales -}}</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>

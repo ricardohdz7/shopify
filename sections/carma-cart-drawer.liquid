@@ -1,0 +1,130 @@
+<div class="modal-content">
+  <div class="modal-header align-items-center">
+    <h4 class="modal-title" id="carModalLabel">Tu carrito</h4>
+    {% if cart.item_count > 0 %}
+      <p class="mb-0 mx-auto cantidad-del-carrito">
+        <span class="cantidad">{{ cart.item_count }}</span> artículos
+      </p>
+    {% endif %}
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  </div>
+  <div class="modal-body">
+    {% if cart.items.size > 0 %}
+      <div class="d-flex flex-column row-gap-5">
+        {% for item in cart.items %}
+          <div class="cart-product rounded">
+            <div class="row align-items-center">
+              <div class="col-3">
+                <div class="cart-item__img cursor-pointer" onclick="window.location='{{- item.url -}}'">
+                  <img
+                    src="{{ item.image | image_url}}"
+                    alt="{{ item.product.title }}"
+                    width="auto"
+                    height="auto"
+                    class="rounded"
+                  >
+                </div>
+              </div>
+              <div class="col-9">
+                <div class="row">
+                  <div class="col">
+                    <div class="cart-product__details">
+                      {% if item.product.tags.size > 0 %}
+                        <div
+                          class="cart-item__tag fw-light text-sm cursor-pointer"
+                          onclick="window.location='{{- item.url -}}'"
+                        >
+                          {{ item.product.tags.first }}
+                        </div>
+                      {% endif %}
+                      <div class="cart-item__title cursor-pointer" onclick="window.location='{{- item.url -}}'">
+                        {{ item.product.title -}}
+                        {%- if item.variant.title != 'Default Title' %} {{ item.variant.title }}{% endif %}
+                      </div>
+                      <div class="row">
+                        <div class="col-auto carma-main-product">
+                          <div class="input-group cantidad">
+                            <span class="input-group-text minus cursor-pointer"
+                              ><img src="{{ '4231.svg' | asset_url }}" width="auto" height="auto"
+                            ></span>
+                            <input
+                              type="text"
+                              required
+                              class="form-control text-center"
+                              name="quantity"
+                              value="{{ item.quantity }}"
+                            >
+                            <span class="input-group-text plus cursor-pointer"
+                              ><img src="{{ '4230.svg' | asset_url }}" width="auto" height="auto"
+                            ></span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-auto d-flex flex-column justify-content-between">
+                    <div class="cart-item__remove pe-3 text-end">
+                      <a
+                        href="#"
+                        class="remove-cart-item text-black fw-light text-sm"
+                        data-line="{{ forloop.index }}"
+                        >Remover</a
+                      >
+                    </div>
+                    <div class="cart-item__price text-end pe-3">
+                      {{ item.final_line_price | money }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      <div class="my-5 py-2">
+        <hr>
+      </div>
+      <h4 class="mb-5">Recomendados para tí</h4>
+      <div class="carma-cart-recommendations row"></div>
+      <div
+        id="carma-cart-product-ids"
+        style="display:none;"
+        data-product-ids="{% for item in cart.items %}{{ item.product.id }}{% unless forloop.last %},{% endunless %}{% endfor %}"
+      >
+        <!-- IDs de producto del carrito, separados por coma -->
+      </div>
+    {% else %}
+      <div class="carma-cart-empty d-flex flex-column align-items-center justify-content-center py-5">
+        <div class="empty-cart-icon mb-4">
+          <svg width="56" height="56" fill="none" viewBox="0 0 56 56">
+            <rect width="56" height="56" rx="16" fill="#F5F5F5"/>
+            <!-- Manubrio / Asa del carrito -->
+            <path d="M20 16 Q28 8, 36 16" stroke="#C7C7C7" stroke-width="2" fill="none"/>
+            <!-- Cuerpo del carrito -->
+            <path d="M16 20h24l-2 18H18l-2-18z" stroke="#C7C7C7" stroke-width="2" fill="none"/>
+            <!-- Ruedas -->
+            <circle cx="23" cy="42" r="2" fill="#C7C7C7"/>
+            <circle cx="35" cy="42" r="2" fill="#C7C7C7"/>
+          </svg>
+        </div>
+        <h5 class="mb-2 fw-bold text-secondary">Tu carrito está vacío</h5>
+        <p class="mb-4 text-muted">¡Aún no has añadido ningún producto!</p>
+        <a href="/collections/all" class="boton black">Ver productos</a>
+      </div>
+    {% endif %}
+  </div>
+  {% if cart.items.size > 0 %}
+    <div class="modal-footer">
+      <div class="row w-100 g-0">
+        <div class="col">
+          <p class="fw-semibold m-0">Total estimado</p>
+        </div>
+        <div class="col-auto">
+          <p class="fw-semibold m-0">{{ cart.total_price | money }}</p>
+        </div>
+      </div>
+      <p class="text-sm fw-light w-100 mb-3">Envío y descuentos calculados al finalizar la compra</p>
+      <a href="/checkout" class="boton black w-100 text-center">Checkout</a>
+    </div>
+  {% endif %}
+</div>

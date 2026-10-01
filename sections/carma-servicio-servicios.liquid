@@ -1,0 +1,143 @@
+{% schema %}
+{
+  "name": "Servicios",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "Contamos con diferentes servicios de MediPedi para ti"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Color de fondo",
+      "default": "#f2f2f2"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "service",
+      "name": "Servicio",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Nombre"
+        },
+        {
+          "type": "richtext",
+          "id": "descripcion",
+          "label": "Descripción"
+        },
+        {
+          "type": "text",
+          "id": "btntext",
+          "label": "Texto del botón"
+        },
+        {
+          "type": "url",
+          "id": "btnlink",
+          "label": "Enlace del botón"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Imágen"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+<section class="carma-servicios py-5 mt-5">
+  <div class="container mt-5">
+    {% if section.settings.title != blank %}
+      <h2 class="mb-sm-5 pb-5">{{ section.settings.title }}</h2>
+    {% endif %}
+
+    {% if section.blocks.size > 0 %}
+      <div class="row custom-gx gy-5">
+        <!-- Columna izquierda: menú vertical de servicios -->
+        <div class="col-sm-5 col-md-4 col-lg-3">
+          <div
+            class="nav flex-column nav-servicios"
+            id="servicios-tab"
+            role="tablist"
+            aria-orientation="vertical"
+            style="background-color:{{ section.settings.background }}"
+          >
+            {% for block in section.blocks %}
+              {% assign is_active = forloop.first %}
+              <button
+                class="nav-link text-center h4 service-link {% if is_active %}active{% endif %}"
+                id="servicio-{{ block.id }}-tab"
+                data-bs-toggle="pill"
+                data-bs-target="#servicio-{{ block.id }}"
+                type="button"
+                role="tab"
+                aria-controls="servicio-{{ block.id }}"
+                aria-selected="{% if is_active %}true{% else %}false{% endif %}"
+                data-posicion="{{ forloop.index }}"
+              >
+                {{ block.settings.title | default: block.type | escape }}
+              </button>
+            {% endfor %}
+          </div>
+        </div>
+
+        <!-- Columna derecha: contenido del servicio seleccionado -->
+        <div class="col">
+          <div class="tab-content" id="servicios-tabContent">
+            {% for block in section.blocks %}
+              {% assign is_active = forloop.first %}
+              <div
+                class="tab-pane fade {% if is_active %}show active{% endif %}"
+                id="servicio-{{ block.id }}"
+                role="tabpanel"
+                aria-labelledby="servicio-{{ block.id }}-tab"
+              >
+                <div class="row custom-gx gy-5">
+                  <div class="col-12 col-lg-7">
+                    <h3>{{ block.settings.title }}</h3>
+                    <div class="rte my-5">
+                      {{ block.settings.descripcion }}
+                    </div>
+
+                    {% if block.settings.btntext != blank or block.settings.btnlink != blank %}
+                      <a
+                        href="{{ block.settings.btnlink | default: '#' }}"
+                        class="boton aqua"
+                      >
+                        {{ block.settings.btntext | default: 'Ver más' }}
+                      </a>
+                    {% endif %}
+                  </div>
+
+                  <div class="col-12 col-lg-5">
+                    {% if block.settings.image != blank %}
+                      <img
+                        class="img-fluid rounded"
+                        src="{{ block.settings.image | image_url: width: 1200 }}"
+                        alt="{{ block.settings.title | escape }}"
+                        loading="lazy"
+                        width="100%"
+                        height="auto"
+                      >
+                    {% else %}
+                      <div class="ratio ratio-4x3 bg-light rounded border d-flex align-items-center justify-content-center">
+                        <span class="text-muted">Sin imagen</span>
+                      </div>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    {% else %}
+      <div class="alert alert-info mb-0" role="alert">Aún no has agregado bloques de servicio a esta sección.</div>
+    {% endif %}
+  </div>
+</section>

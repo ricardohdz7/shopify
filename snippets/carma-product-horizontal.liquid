@@ -1,0 +1,49 @@
+<a class="carma-product-card-horizontal text-black text-decoration-none" href="{{ product.url }}">
+  <div class="rounded contenedor">
+    <div class="row align-items-center">
+      <div class="col-auto">
+        <!-- Imagen principal del producto -->
+        <div class="carma-product-card__image">
+          <img
+            src="{{ product.featured_image | image_url: width: 500,height: 500 }}"
+            alt="{{ product.title }}"
+            width="100%"
+            height="auto"
+            class="rounded"
+          >
+        </div>
+      </div>
+      <div class="col py-2">
+        <!-- Etiqueta del producto (primera etiqueta) -->
+        {% if product.tags.size > 0 %}
+          <div class="carma-product-card__label fw-light">
+            {{ product.tags.first }}
+          </div>
+        {% endif %}
+        <!-- Título del producto -->
+        <div class="carma-product-card__title my-2">
+          {{ product.title }}
+        </div>
+
+        <!-- Precio del producto -->
+        <div class="carma-product-card__price">
+          {% if product.compare_at_price > product.price %}
+            <span class="carma-product-card__price--sale fw-bold">
+              {{ product.price | money }}
+            </span>
+            <span class="carma-product-card__price--compare text-muted text-decoration-line-through ms-2">
+              {{ product.compare_at_price | money }}
+            </span>
+          {% else %}
+            <span class="carma-product-card__price--regular">
+              {{ product.price | money }}
+            </span>
+          {% endif %}
+        </div>
+      </div>
+      <div class="col-auto icon pe-4">
+        <img width="auto" height="auto" src="{{ '4204.svg' | asset_url }}">
+      </div>
+    </div>
+  </div>
+</a>

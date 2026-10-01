@@ -1,0 +1,44 @@
+{% schema %}
+{
+  "name": "Agendar cita",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "default": "Escríbenos para brindarte más información y  agendar una cita",
+      "label": "Título"
+    },
+    {
+      "type": "text",
+      "id": "button",
+      "label": "Texto del botón",
+      "default": "Solicitar una cita"
+    },
+    {
+      "type": "text",
+      "id": "url",
+      "label": "Enlace del botón"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Imágen de fondo"
+    }
+  ]
+}
+{% endschema %}
+<section
+  class="agendar-cita py-5 position-relative"
+  style="background-image:url('{{ section.settings.image | image_url }}')"
+>
+  <div class="container py-5 my-sm-5 position-relative z-2">
+    <div class="row justify-content-center py-sm-5">
+      <div class="col-lg-7">
+        <h1 class="text-center mb-5 text-white">{{ section.settings.title }}</h1>
+        <p class="text-center">
+          <a href="{{ section.settings.url }}" class="boton aqua">{{ section.settings.button }}</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

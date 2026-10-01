@@ -1,0 +1,143 @@
+{% schema %}
+{
+  "name": "Sucursales",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "Encuentra una sucursal"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "sucursal",
+      "name": "Sucursal",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Nombre"
+        },
+        {
+          "type": "text",
+          "id": "address",
+          "label": "Dirección"
+        },
+        {
+          "type": "text",
+          "id": "enlace-text",
+          "label": "Texto del enlace",
+          "default": "Ir con Waze"
+        },
+        {
+          "type": "url",
+          "id": "enlace",
+          "label": "Enlace"
+        },
+        {
+          "type": "text",
+          "id": "horario",
+          "label": "Horario",
+          "default": "Lun a Sa 9:00am - 6:30pm Do 9:00am - 6:00pm"
+        },
+        {
+          "type": "text",
+          "id": "telefono",
+          "label": "Teléfono",
+          "default": "7840 9496"
+        },
+        {
+          "type": "textarea",
+          "id": "mapa",
+          "label": "Código de Google Maps"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+<section class="carma-sucursales-main-v2">
+  <div class="titular py-5">
+    <div class="container">
+      <h4 class="m-0">{{- section.settings.title -}}</h4>
+    </div>
+  </div>
+  <div class="sucursales py-5">
+    <div class="container mb-5">
+      <div class="row justify-content-center">
+        <div class="col-lg-10 col-xl-8">
+          <div class="row">
+            <div class="listado-contenedor col-md-auto">
+              <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                {% for block in section.blocks %}
+                  <button
+                    class="nav-link{% if forloop.first %} active{% endif %}"
+                    id="v-pills-sucursal-tab-{{ forloop.index }}"
+                    data-bs-toggle="pill"
+                    data-bs-target="#v-pills-sucursal-{{ forloop.index }}"
+                    type="button"
+                    role="tab"
+                    aria-controls="v-pills-sucursal-{{ forloop.index }}"
+                    aria-selected="{%- if forloop.first -%}true{%- else -%}false{%- endif -%}"
+                  >
+                    {{ block.settings.title }}
+                  </button>
+                  {% unless forloop.last %}
+                    <div class="separador"></div>
+                  {% endunless %}
+                {% endfor %}
+              </div>
+            </div>
+            <div class="tab-content col-md" id="v-pills-tabContent">
+              {% for block in section.blocks %}
+                <div
+                  class="tab-pane fade{%- if forloop.first -%} show active{%- endif -%}"
+                  id="v-pills-sucursal-{{forloop.index }}"
+                  role="tabpanel"
+                  aria-labelledby="v-pills-sucursal-tab-{{forloop.index }}"
+                  tabindex="0"
+                >
+                  <div class="row justify-content-between">
+                    <div class="col">
+                      <h4>{{ block.settings.title }}</h4>
+                    </div>
+                    <div class="col-auto">
+                      <a href="{{- block.settings.enlace -}}" target="_blank">{{- block.settings['enlace-text'] -}}</a>
+                    </div>
+                  </div>
+                  <p>{{- block.settings.address -}}</p>
+                  <div class="row mt-5 gy-4">
+                    <div class="col-sm">
+                      <div class="row gx-2">
+                        <div class="col-auto">
+                          <img src="{{ '5669.svg' | asset_url }}" width="auto" height="auto" class="icon">
+                        </div>
+                        <div class="col">
+                          <p class="m-0">{{- block.settings.horario -}}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-auto">
+                      <div class="row gx-2">
+                        <div class="col-auto">
+                          <img src="{{ '5668.svg' | asset_url }}" width="auto" height="auto" class="icon">
+                        </div>
+                        <div class="col">
+                          <p class="m-0">{{- block.settings.telefono -}}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mt-5">
+                    {{- block.settings.mapa -}}
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

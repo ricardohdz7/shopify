@@ -1,0 +1,62 @@
+{% schema %}
+{
+  "name": "Página de artículo",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título artículos recomendados",
+      "default": "Otros artículos"
+    },
+    {
+      "type": "number",
+      "id": "quantity",
+      "label": "Cantidad de artículos relacionados",
+      "default": 3
+    }
+  ]
+}
+{% endschema %}
+<section class="carma-post my-5 py-5">
+  <div class="container my-sm-5">
+    <div class="row custom-gx custom-gy">
+      <div class="col-lg-8">
+        <div class="carma-article-content">
+          <h1 class="article-title">{{ article.title }}</h1>
+          {% if article.excerpt != blank %}
+            <h4 class="my-4">{{ article.excerpt }}</h4>
+          {% endif %}
+          <p class="article-date fw-light mt-4">{{ article.published_at | date: '%d de %B, %Y' }}</p>
+          <div class="article-body pt-3">
+            {% if article.image %}
+              <img
+                src="{{ article.image | image_url }}"
+                alt="{{ article.title }}"
+                class="img-fluid rounded"
+                width="100%"
+                height="auto"
+              >
+            {% endif %}
+            {{ article.content }}
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="related-post-column p-5">
+          <h3 class="mb-5">{{ section.settings.title }}</h3>
+          <div class="row g-5">
+            {%- assign relacionados = 0 -%}
+            {% for related in blog.articles %}
+              {% if related.id != article.id and relacionados <= section.settings.quantity %}
+                <div class="col-12 col-sm-6 col-lg-12">
+                  {% render 'carma-blog-card', blog: related %}
+                </div>
+                {%- assign relacionados = relacionados | plus: 1 -%}
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

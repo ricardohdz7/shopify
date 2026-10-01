@@ -1,0 +1,173 @@
+{% schema %}
+{
+  "name": "Recomendados",
+  "presets": [
+    {
+      "name": "Recomendados"
+    }
+  ],
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título de la sección"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Color de fondo",
+      "default": "#F55527"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "recomendations",
+      "name": "Recomendations",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Título"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Descripción"
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Seleccionar producto"
+        },
+        {
+          "type": "header",
+          "content": "Antes & después"
+        },
+        {
+          "type": "image_picker",
+          "id": "prev",
+          "label": "Imágen de antes"
+        },
+        {
+          "type": "image_picker",
+          "id": "next",
+          "label": "Imágen de después"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+<section class="recomendations" style="background-color:{{ section.settings.background }}">
+  <div class="swiper swiper-recomendations">
+    <div class="swiper-wrapper">
+      {% for block in section.blocks %}
+        <div class="swiper-slide">
+          <div class="row align-items-center gx-0">
+            <div class="col-lg-7 text-white">
+              <div class="recomendation-text py-5">
+                <div class="row align-items-center justify-content-center gy-4">
+                  <div class="col-lg-8 col-md-7 col-sm-6">
+                    <h5>{{ section.settings.title }}</h5>
+                    <h1 class="my-5">{{ block.settings.name }}</h1>
+                    <p>{{ block.settings.description }}</p>
+                  </div>
+                  <div class="col-7 col-sm">
+                    {% if block.settings.product != blank %}
+                      <div class="bg-white text-black rounded p-4">
+                        {% render 'carma-product', product: all_products[block.settings.product] %}
+                      </div>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg">
+              <div class="comparison-container">
+                <img
+                  src="{{ block.settings.prev | image_url }}"
+                  alt="Antes"
+                  class="comparison-img comparison-img--before"
+                  width="100%"
+                  height="auto"
+                >
+                <img
+                  src="{{ block.settings.next | image_url }}"
+                  alt="Después"
+                  class="comparison-img comparison-img--after"
+                  width="100%"
+                  height="auto"
+                >
+                <div class="comparison-slider" id="comparison-slider">
+                  <span>Desliza</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    <!-- If we need pagination -->
+    <div class="swiper-pagination"></div>
+    <!-- If we need navigation buttons -->
+    <div class="arrows">
+      <div class="container ps-0">
+        <div class="d-flex gap-4">
+          <div class="swiper-custom-anterior"><img width="auto" height="auto" src="{{ '4202.svg' | asset_url }}"></div>
+          <div class="swiper-custom-siguiente"><img width="auto" height="auto" src="{{ '4203.svg' | asset_url }}"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+  // Selecciona todos los comparadores en la página (uno por slide)
+  document.querySelectorAll('.comparison-container').forEach((container) => {
+    const afterImg = container.querySelector('.comparison-img--after');
+    const slider = container.querySelector('.comparison-slider');
+    let isSliding = false;
+
+    // Detén la propagación de los eventos SOLO dentro del slider correspondiente
+    ['mousedown', 'touchstart', 'pointerdown'].forEach((event) => {
+      slider.addEventListener(event, function (e) {
+        e.stopPropagation();
+      });
+    });
+
+    slider.addEventListener('mousedown', (e) => {
+      isSliding = true;
+    });
+
+    window.addEventListener('mouseup', () => {
+      isSliding = false;
+    });
+
+    container.addEventListener('mousemove', (e) => {
+      if (!isSliding) return;
+      const rect = container.getBoundingClientRect();
+      let x = e.clientX - rect.left;
+      x = Math.max(0, Math.min(x, rect.width));
+      const percent = (x / rect.width) * 100;
+      afterImg.style.clipPath = `inset(0 0 0 ${percent}%)`;
+      slider.style.left = `${percent}%`;
+    });
+
+    container.addEventListener('touchmove', (e) => {
+      if (!isSliding) return;
+      const rect = container.getBoundingClientRect();
+      let x = e.touches[0].clientX - rect.left;
+      x = Math.max(0, Math.min(x, rect.width));
+      const percent = (x / rect.width) * 100;
+      afterImg.style.clipPath = `inset(0 0 0 ${percent}%)`;
+      slider.style.left = `${percent}%`;
+    });
+
+    slider.addEventListener('touchstart', () => {
+      isSliding = true;
+    });
+
+    window.addEventListener('touchend', () => {
+      isSliding = false;
+    });
+  });
+</script>

@@ -1,0 +1,43 @@
+<div class="carma-video-thumbnail-wrapper video-{{ video.id }} position-relative">
+  <button class="carma-video-play-btn" aria-label="Reproducir video">
+    <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+      <circle cx="40" cy="40" r="40" fill="rgba(0,0,0,0.4)"/>
+      <polygon points="32,25 60,40 32,55" fill="#fff"/>
+    </svg>
+  </button>
+  <img
+    src="{{ video.preview_image | image_url }}"
+    alt="Portada del video"
+    class="video-thumbnail w-100"
+    style="display:block;"
+    width="100%"
+    height="auto"
+  >
+  {{
+    video
+    | video_tag:
+      controls: true,
+      autoplay: false,
+      loop: false,
+      muted: false,
+      class: 'carma-video-player w-100',
+      style: 'display:none'
+  }}
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var wrapper = document.querySelector('.carma-video-thumbnail-wrapper.video-{{ video.id }}');
+    if (!wrapper) return;
+    var playBtn = wrapper.querySelector('.carma-video-play-btn');
+    var thumbnail = wrapper.querySelector('.video-thumbnail');
+    var video = wrapper.querySelector('.carma-video-player');
+    if (playBtn && thumbnail && video) {
+      playBtn.addEventListener('click', function () {
+        playBtn.style.display = 'none';
+        thumbnail.style.display = 'none';
+        video.style.display = 'block';
+        video.play();
+      });
+    }
+  });
+</script>

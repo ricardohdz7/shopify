@@ -1,0 +1,61 @@
+{% schema %}
+{
+  "name": "Descubrir productos",
+  "presets": [
+    {
+      "name": "Descubrir productos"
+    }
+  ],
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtítulo"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "categoria",
+      "name": "Categoria",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Imágen"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título"
+        },
+        {
+          "type": "url",
+          "id": "enlace",
+          "label": "Enlace"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+<section class="py-5 my-md-5">
+  <div class="container">
+    <h1 class="text-center fw-semibold mb-4">{{- section.settings.title -}}</h1>
+    <p class="text-center">{{- section.settings.subtitle -}}</p>
+  </div>
+  <div class="container mt-5 pt-5">
+    <div class="row gy-5">
+      {% for block in section.blocks %}
+        <a href="{{ block.settings.enlace }}" class="col-6 col-md-4 col-lg text-black text-decoration-none">
+          <img class="rounded mb-5" width="100%" height="auto" src="{{- block.settings.image | image_url -}}">
+          <h3>{{- block.settings.title -}}</h3>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>

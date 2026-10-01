@@ -1,0 +1,51 @@
+{% schema %}
+{
+  "name": "Contacto",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "¿No encontraste tu respuesta?"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtítulo",
+      "default": "Puedes contactarte con nosotros si necesitas ayuda."
+    },
+    {
+      "type": "text",
+      "id": "boton-text",
+      "label": "Texto del botón",
+      "default": "Contactar"
+    },
+    {
+      "type": "url",
+      "id": "boton-link",
+      "label": "Enlace del botón"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Imágen"
+    }
+  ]
+}
+{% endschema %}
+<section class="carma-faq-contacto">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="text-container">
+          <h1 class="fw-semibold">{{ section.settings.title }}</h1>
+          <p class="fw-light my-5">{{ section.settings.subtitle }}</p>
+          <a href="{{ section.settings.boton-link }}" class="boton black">{{ section.settings['boton-text'] }}</a>
+        </div>
+      </div>
+      <div class="col-md-6 imagen" style="background-image:url('{{ section.settings.image | image_url }}')">
+        <img src="{{ section.settings.image | image_url }}" width="100%" height="auto" class="d-md-none opacity-0">
+      </div>
+    </div>
+  </div>
+</section>

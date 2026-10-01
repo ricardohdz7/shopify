@@ -1,0 +1,277 @@
+{% schema %}
+{
+  "name": "Producto",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título de productos recomendados",
+      "default": "Recomendado para ti"
+    }
+  ]
+}
+{% endschema %}
+<div class="carma-main-product">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-sm-10">
+        <div class="my-5">
+          {% render 'carma-breadcrumbs' %}
+        </div>
+        <div class="row custom-gx mb-5 pb-5">
+          <div class="col-lg-7">
+            <div class="product-gallery">
+              <div class="row gx-4">
+                <div class="col-2 order-sm-1">
+                  <div class="column-thumbnails">
+                    <div class="row gy-4">
+                      {% for media in product.media %}
+                        <div class="col-12 p-relative">
+                          <img
+                            src="{% if media.media_type == 'image' %}{{ media | image_url: width: 500, height: 500 }}{% elsif media.media_type == 'video' %}{{ media.preview_image | img_url: '500x500' }}{% endif %}"
+                            alt="{{ product.title }}"
+                            class="rounded thumbnail-image"
+                            data-image="{{ media.id }}"
+                            width="100%"
+                            height="auto"
+                          >
+                          {% if media.media_type == 'video' %}
+                            <span class="video-play-icon">&#9654;</span>
+                          {% endif %}
+                        </div>
+                      {% endfor %}
+                    </div>
+                  </div>
+                </div>
+                <div class="col order-sm-2">
+                  <div class="position-relative">
+                    {% for media in product.media %}
+                      {% if media.media_type == 'image' %}
+                        <img
+                          src="{{ media | image_url: width: 1000, height: 1000 }}"
+                          alt="{{ product.title }}"
+                          class="rounded imagen-producto{% if forloop.first %} active featured-image{% endif %}"
+                          data-image="{{ media.id }}"
+                          width="100%"
+                          height="auto"
+                        >
+                      {% elsif media.media_type == 'video' %}
+                        <!-- Video principal -->
+                        <video
+                          class="rounded imagen-producto"
+                          data-image="{{ media.id }}"
+                          controls
+                          preload="metadata"
+                          poster="{{ media.preview_image | image_url: width: 1000, height: 1000 }}"
+                          width="100%"
+                          height="auto"
+                        >
+                          {% for source in media.sources %}
+                            <source src="{{ source.url }}" type="{{ source.mime_type }}">
+                          {% endfor %}
+                          Tu navegador no soporta la reproducción de video.
+                        </video>
+                      {% endif %}
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-5 mt-5 mt-lg-0">
+            <!-- Detalles del producto -->
+            <div class="product-details rounded">
+              <!-- Etiqueta del producto (primera etiqueta) -->
+              {% if product.vendor %}
+                <div class="carma-product-card__label fw-light">
+                  {{ product.vendor }}
+                </div>
+              {% endif %}
+              <!-- Título y proveedor -->
+              <h3 class="product-title">{{ product.title }}</h3>
+              <!-- Precio -->
+              <div class="product-price my-4">
+                {% assign currency_code = cart.currency.iso_code | default: shop.currency %}
+
+                {% if product.compare_at_price > product.price %}
+                  <h4 class="price fw-semibold">
+                    <s>{{ product.compare_at_price | money }}</s> {{ product.price | money }}
+                    {{ currency_code }}
+                  </h4>
+                {% else %}
+                  <h4 class="price fw-semibold">
+                    {{ product.price | money }}
+                    {{ currency_code }}
+                  </h4>
+                {% endif %}
+              </div>
+              <!-- Descripción del producto -->
+              <div class="product-description mt-5 fw-light">
+                {{ product.description }}
+              </div>
+
+              <form
+                method="post"
+                action="/cart/add"
+                class="product-form"
+                data-product-json="{{ product | json | escape }}"
+              >
+                {% comment %}
+                  Renderiza cada opción del producto en una cuadrícula:
+                  ─ Label arriba  (Size, Color, etc.)
+                  ─ Valores en celdas iguales (botones)
+                {% endcomment %}
+
+                {% for option in product.options_with_values %}
+                  {% unless option.name == 'Title' %}
+                    <div class="row justify-content-between mt-5 mb-3">
+                      <div class="col-auto">
+                        <p class="fw-medium">{{ option.name }}:</p>
+                      </div>
+                    </div>
+                    <!-- Cuadrícula de valores -->
+                    <div class="row g-0 product-options">
+                      {% for value in option.values %}
+                        <div class="col-4 col-sm-2 option position-relative">
+                          <p class="value" data-option="{{ option.name }}" data-value="{{ value }}">{{ value }}</p>
+                        </div>
+                      {% endfor %}
+                    </div>
+                    <!-- Select oculto para que el formulario siga funcionando -->
+                    <select
+                      name="options[{{ option.name }}]"
+                      class="d-none option-select"
+                      data-option-index="{{ forloop.index0 }}"
+                    >
+                      <option value=""></option>
+                      {% for value in option.values %}
+                        <option value="{{ value }}">{{ value }}</option>
+                      {% endfor %}
+                    </select>
+                  {% endunless %}
+                {% endfor %}
+                <div class="row mt-5">
+                  <div class="col-auto">
+                    <div class="input-group cantidad">
+                      <span class="input-group-text minus cursor-pointer"
+                        ><img src="{{ '4231.svg' | asset_url }}" width="auto" height="auto"
+                      ></span>
+                      <input type="text" required class="form-control text-center" name="quantity" value="1">
+                      <span class="input-group-text plus cursor-pointer"
+                        ><img src="{{ '4230.svg' | asset_url }}" width="auto" height="auto"
+                      ></span>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <button
+                      type="submit"
+                      class="w-100 add-to-cart-btn black"
+                      {% if product.variants.size > 1 %}
+                        disabled
+                      {% endif %}
+                    >
+                      Añadir al carrito
+                    </button>
+                  </div>
+                </div>
+                <input type="hidden" name="id" class="selected-variant-id" value="{{ product.variants.first.id }}">
+                {% comment %}
+                  Inventario
+                {% endcomment %}
+                <div class="variant-inventory-data" style="display: none;">
+                  {% for variant in product.variants %}
+                    <div
+                      data-variant-id="{{ variant.id }}"
+                      data-inventory="{{ variant.inventory_quantity }}"
+                      data-inventory-management="{{ variant.inventory_management }}"
+                    ></div>
+                  {% endfor %}
+                </div>
+              </form>
+              <div class="accordion mt-5 pt-5" id="accordionExample">
+                {% if product.metafields.custom.caracteristicas != blank %}
+                  <div class="accordion-item">
+                    <h2 class="accordion-header">
+                      <button
+                        class="accordion-button fw-semibold"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#collapseTwo"
+                        aria-expanded="true"
+                        aria-controls="collapseTwo"
+                      >
+                        Características
+                      </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                      <div class="accordion-body fw-light">
+                        <div class="row gy-4">
+                          {% assign features = product.metafields.custom.caracteristicas.value
+                            | newline_to_br
+                            | split: '<br />'
+                          %}
+                          {% for feature in features %}
+                            {% if feature != blank %}
+                              <div class="col-6">{{ feature }}</div>
+                            {% endif %}
+                          {% endfor %}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                {% endif %}
+                {% if product.metafields.custom.forma_de_uso != blank %}
+                  <div class="accordion-item">
+                    <h2 class="accordion-header">
+                      <button
+                        class="accordion-button fw-semibold collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#collapseOne"
+                        aria-expanded="false"
+                        aria-controls="collapseOne"
+                      >
+                        Forma de uso
+                      </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                      <div class="accordion-body fw-light">
+                        {{ product.metafields.custom.forma_de_uso.value | newline_to_br }}
+                      </div>
+                    </div>
+                  </div>
+                {% endif %}
+              </div>
+              <h4 class="my-5">{{ section.settings.title }}</h4>
+              <div class="carma-recommendations row"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var recommendationsContainer = document.querySelector('.carma-recommendations');
+    if (!recommendationsContainer) return;
+
+    // ID del producto actual desde Shopify
+    var productId = {{ product.id }};
+    // Llama al endpoint de recomendaciones
+    fetch('/recommendations/products?product_id=' + productId + '&limit=2&section_id=carma-product-recommendations')
+      .then(function(res) { return res.text(); })
+      .then(function(html) {
+        // Extrae solo el contenido de la sección si viene todo el HTML (seguro)
+        var temp = document.createElement('div');
+        temp.innerHTML = html;
+        var section = temp.querySelector('.carma-recommendations');
+        if (section) {
+          recommendationsContainer.innerHTML = section.innerHTML;
+        } else {
+          // fallback si no encuentra el wrapper
+          recommendationsContainer.innerHTML = html;
+        }
+      });
+  });
+</script>

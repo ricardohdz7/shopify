@@ -1,0 +1,166 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "header": {
+      "type": "carma-faq-header",
+      "settings": {
+        "image": "shopify://shop_images/preguntasfrecuentes-PREGUNTAS_FRECUENTES.webp"
+      }
+    },
+    "asked-questions": {
+      "type": "carma-faq-faqs",
+      "blocks": {
+        "seccion1_QqxKjP": {
+          "type": "seccion1",
+          "settings": {
+            "title": "¿Puedo cancelar mi pedido?",
+            "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"
+          }
+        },
+        "seccion1_xBD3jN": {
+          "type": "seccion1",
+          "settings": {
+            "title": "Puse mal mi dirección ¿qué puedo hacer?",
+            "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"
+          }
+        },
+        "seccion1_kYa9A6": {
+          "type": "seccion1",
+          "settings": {
+            "title": "¿Cómo puedo consultar el estado de mi pedido?",
+            "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"
+          }
+        },
+        "seccion1_6bqFhr": {
+          "type": "seccion1",
+          "settings": {
+            "title": "¿Ofrecen devoluciones?",
+            "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"
+          }
+        },
+        "seccion1_d3iAtn": {
+          "type": "seccion1",
+          "settings": {
+            "title": "Recibí artículos incorrectos ¿Qué debo hacer?",
+            "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"
+          }
+        },
+        "seccion2_cHYKzP": {
+          "type": "seccion2",
+          "settings": {
+            "title": "¿Puedo cancelar mi pedido?",
+            "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"
+          }
+        },
+        "seccion2_rztxgy": {
+          "type": "seccion2",
+          "settings": {
+            "title": "¿Puedo cancelar mi pedido?",
+            "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"
+          }
+        },
+        "seccion2_T9WqwB": {
+          "type": "seccion2",
+          "settings": {
+            "title": "¿Puedo cancelar mi pedido?",
+            "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"
+          }
+        },
+        "seccion2_HbVjJw": {
+          "type": "seccion2",
+          "settings": {
+            "title": "¿Puedo cancelar mi pedido?",
+            "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"
+          }
+        },
+        "seccion2_cfkXix": {
+          "type": "seccion2",
+          "settings": {
+            "title": "¿Puedo cancelar mi pedido?",
+            "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"
+          }
+        },
+        "seccion3_9Hci7g": {
+          "type": "seccion3",
+          "settings": {
+            "title": "¿Puedo cancelar mi pedido?",
+            "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"
+          }
+        },
+        "seccion3_iYEJR4": {
+          "type": "seccion3",
+          "settings": {
+            "title": "¿Puedo cancelar mi pedido?",
+            "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"
+          }
+        },
+        "seccion3_y7NjNf": {
+          "type": "seccion3",
+          "settings": {
+            "title": "¿Puedo cancelar mi pedido?",
+            "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"
+          }
+        },
+        "seccion3_mD7LGN": {
+          "type": "seccion3",
+          "settings": {
+            "title": "¿Puedo cancelar mi pedido?",
+            "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"
+          }
+        },
+        "seccion3_GqCpWa": {
+          "type": "seccion3",
+          "settings": {
+            "title": "¿Puedo cancelar mi pedido?",
+            "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"
+          }
+        }
+      },
+      "block_order": [
+        "seccion1_QqxKjP",
+        "seccion1_xBD3jN",
+        "seccion1_kYa9A6",
+        "seccion1_6bqFhr",
+        "seccion1_d3iAtn",
+        "seccion2_cHYKzP",
+        "seccion2_rztxgy",
+        "seccion2_T9WqwB",
+        "seccion2_HbVjJw",
+        "seccion2_cfkXix",
+        "seccion3_9Hci7g",
+        "seccion3_iYEJR4",
+        "seccion3_y7NjNf",
+        "seccion3_mD7LGN",
+        "seccion3_GqCpWa"
+      ],
+      "settings": {
+        "title1": "Envíos y devoluciones",
+        "title2": "Productos",
+        "title3": "Sucursales"
+      }
+    },
+    "contacto": {
+      "type": "carma-faq-contacto",
+      "settings": {
+        "title": "¿No encontraste tu respuesta?",
+        "subtitle": "Puedes contactarte con nosotros si necesitas ayuda.",
+        "boton-text": "Contactar",
+        "boton-link": "shopify://pages/contact",
+        "image": "shopify://shop_images/preguntasfrecuentes-PREGUNTAS_FRECUENTES_copia.webp"
+      }
+    }
+  },
+  "order": [
+    "header",
+    "asked-questions",
+    "contacto"
+  ]
+}

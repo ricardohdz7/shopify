@@ -1,0 +1,83 @@
+{% schema %}
+{
+  "name": "Blog",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "Encuentra consejos  para lograr el bienestar y cuidado"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtítulo",
+      "default": "Descubre todos nuestros artículos"
+    },
+    {
+      "type": "text",
+      "id": "button",
+      "label": "Texto del botón",
+      "default": "Ver todos"
+    },
+    {
+      "type": "header",
+      "content": "Blog"
+    },
+    {
+      "type": "blog",
+      "id": "blog",
+      "label": "Seleccionar blog"
+    },
+    {
+      "type": "number",
+      "id": "quantity",
+      "label": "Cantidad de artículos a mostrar",
+      "default": 5
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Color de fondo",
+      "default": "#f55527"
+    }
+  ]
+}
+{% endschema %}
+<section class="carma-sobre-nosotros-blog my-5 py-5">
+  <div class="container">
+    <div class="row gy-5">
+      <div class="col-md-6 col-lg-4">
+        <div
+          class="blog-description rounded text-white p-5 h-100 d-flex flex-column justify-content-between"
+          style="background-color:{{ section.settings.background }}"
+        >
+          <div>
+            <h2 class="mt-5">{{ section.settings.title }}</h2>
+            <p class="mt-5">{{ section.settings.subtitle }}</p>
+          </div>
+          <p>
+            <a class="boton white mt-5" href="{{ section.settings.blog.url }}">{{ section.settings.button }}</a>
+          </p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-8">
+        <div class="blog swiper">
+          <div class="swiper-wrapper">
+            {% for blog in section.settings.blog.articles %}
+              <div class="swiper-slide">
+                {% render 'carma-blog-card', blog: blog %}
+              </div>
+            {% endfor %}
+          </div>
+          <div class="swiper-button-next">
+            <img src="{{ '4241.svg' | asset_url }}" width="auto" height="auto">
+          </div>
+          <div class="swiper-button-prev">
+            <img src="{{ '4240.svg' | asset_url }}" width="auto" height="auto">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

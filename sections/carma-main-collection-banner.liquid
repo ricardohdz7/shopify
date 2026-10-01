@@ -1,0 +1,42 @@
+{% schema %}
+{
+  "name": "Baner",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Imágen predeterminada"
+    }
+  ]
+}
+{% endschema %}
+{% if collection.featured_image != blank %}
+  {% assign background = collection.featured_image | image_url %}
+{% else %}
+  {% assign background = section.settings.image | image_url %}
+{% endif %}
+<div class="carma-main-collection-banner">
+  <div class="d-none d-sm-block">
+    <div class="container py-5">
+      {% render 'carma-breadcrumbs' %}
+    </div>
+    <div class="container">
+      <div
+        class="baner align-items-end rounded position-relative overflow-hidden d-flex"
+        style="background-image:url('{{- background -}}')"
+      >
+        <div class="p-5 z-2 position-relative">
+          <h1 class="text-white m-0">{{- collection.title -}}</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="d-sm-none baner-mobile" style="background-image:url('{{- background -}}')">
+    <div class="overlay">
+      <div class="container text-white py-4">
+        {% render 'carma-breadcrumbs' %}
+        <h3 class="mb-0 mt-5 pt-5">{{- collection.title -}}</h3>
+      </div>
+    </div>
+  </div>
+</div>

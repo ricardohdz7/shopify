@@ -1,0 +1,168 @@
+{% schema %}
+{
+  "name": "Sucursales",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtítulo",
+      "default": "SUCURSALES"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "Más de 10 sucursales en todo el país"
+    },
+    {
+      "type": "text",
+      "id": "buscador",
+      "label": "Texto del buscador",
+      "default": "Buscar sucursal"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Imágen"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "sucursal",
+      "name": "Sucursal",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Nombre"
+        },
+        {
+          "type": "text",
+          "id": "address",
+          "label": "Dirección"
+        },
+        {
+          "type": "text",
+          "id": "enlace-text",
+          "label": "Texto del enlace"
+        },
+        {
+          "type": "url",
+          "id": "enlace",
+          "label": "Enlace"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+<section class="carma-sucursales-main pb-5" style="background-image:url('{{ '4263.svg' | asset_url }}')">
+  <div class="container-fluid mb-5 pb-5">
+    <div class="row gy-5">
+      <div class="col-md">
+        <div class="content">
+          <div class="text">
+            <p class="aqua">{{ section.settings.subtitle }}</p>
+            <h1 class="mb-5">{{ section.settings.title }}</h1>
+            <div class="input-group input-group-lg mb-5">
+              <input
+                type="search"
+                id="search-sucursal"
+                class="form-control"
+                placeholder="{{ section.settings.buscador }}"
+                aria-label="Buscar aqui"
+                aria-describedby="button-search"
+                name="q"
+              >
+              <button class="btn" type="submit" id="button-search">
+                <img src="{{ '4183.svg' | asset_url }}" width="100%" height="auto">
+              </button>
+            </div>
+          </div>
+          <div class="sucursales overflow-y-auto overflow-x-hidden">
+            {% for block in section.blocks %}
+              <div class="sucursal py-5">
+                <div class="row">
+                  <div class="col">
+                    <p class="m-0">{{ block.settings.title }}</p>
+                    <p class="address text-sm fw-light m-0">{{ block.settings.address }}</p>
+                  </div>
+                  <div class="col-auto">
+                    <p>
+                      <a href="{{ block.settings.enlace }}" target="_blank">{{ block.settings['enlace-text'] }}</a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      <div class="col-md contenedor-imagen">
+        <div class="pt-4 pe-3">
+          <img class="rounded-4" width="100%" height="auto" src="{{ section.settings.image | image_url }}">
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Ajusta la altura de la columna izquierda para que coincida con la imagen
+      function adjustSucursalesHeight() {
+        const img = document.querySelector('.contenedor-imagen img');
+        const content = document.querySelector('.content');
+        const text = document.querySelector('.text');
+        const sucursales = document.querySelector('.sucursales');
+        if (!img || !content || !text || !sucursales) return;
+
+        // Altura de la imagen (columna derecha)
+        const imageHeight = img.clientHeight;
+        // Fijar la altura mínima de la columna izquierda
+        content.style.minHeight = imageHeight + 'px';
+
+        // Obtener padding superior e inferior
+        const computed = window.getComputedStyle(content);
+        const paddingTop = parseFloat(computed.paddingTop) || 0;
+        const paddingBottom = parseFloat(computed.paddingBottom) || 0;
+
+        // Calcular altura disponible para el listado (descontando título/subtítulo y paddings)
+        const textHeight = text.clientHeight;
+        let maxHeight = imageHeight - paddingTop - paddingBottom - textHeight;
+        if (maxHeight < 0) maxHeight = 0;
+
+        // Asignar max-height y habilitar scroll vertical
+        sucursales.style.maxHeight = maxHeight + 'px';
+        sucursales.style.overflowY = 'auto'; // mostrará scroll sólo si hay desbordamiento [oai_citation:1‡developer.mozilla.org](https://developer.mozilla.org/en-US/docs/Web/CSS/overflow#:~:text=auto)
+      }
+
+      // Ejecutar cuando la imagen se cargue o inmediatamente si ya está cargada
+      const imgElement = document.querySelector('.contenedor-imagen img');
+      if (imgElement && !imgElement.complete) {
+        imgElement.addEventListener('load', adjustSucursalesHeight);
+      } else {
+        adjustSucursalesHeight();
+      }
+
+      // Volver a ajustar en caso de redimensionar la ventana
+      window.addEventListener('resize', adjustSucursalesHeight);
+
+      // Filtrado de sucursales (código original)…
+      var input = document.getElementById('search-sucursal');
+      var form = input.closest('form') || document;
+      function filterSucursales() {
+        var term = input.value.trim().toLowerCase();
+        document.querySelectorAll('.sucursal').forEach(function (item) {
+          var title = item.querySelector('p').textContent.toLowerCase();
+          var address = item.querySelector('.address').textContent.toLowerCase();
+          item.style.display = title.includes(term) || address.includes(term) ? '' : 'none';
+        });
+      }
+      input.addEventListener('input', filterSucursales);
+      input.addEventListener('blur', filterSucursales);
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        filterSucursales();
+      });
+    });
+  </script>
+</section>

@@ -1,0 +1,78 @@
+{% schema %}
+{
+  "name": "Necesitas este servicio",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "Necesitas este servicio si…"
+    },
+    {
+      "type": "number",
+      "id": "posicion",
+      "label": "Posición en el tab",
+      "placeholder": "Ej: 2"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "razon",
+      "name": "Razón",
+      "limit": 5,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Seleccionar imágen"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Servicios"
+    }
+  ]
+}
+{% endschema %}
+<section
+  class="carma-servicio-necesitas py-5 position-{{ section.settings.posicion }}{% unless section.settings.posicion == 1 %} d-none{% endunless %}"
+  style="background-image:url('{{ '4238.svg' | asset_url }}')"
+>
+  <div class="container my-sm-5">
+    <h1 class="mb-5 pb-4">{{ section.settings.title }}</h1>
+
+    <div
+      class="swiper carma-necesitas-swiper"
+      data-space="16"
+      aria-label="{{ section.settings.title | escape }}"
+    >
+      <div class="swiper-wrapper">
+        {% for block in section.blocks %}
+          <div class="swiper-slide">
+            <img
+              draggable="false"
+              src="{{ block.settings.image | image_url }}"
+              class="rounded mb-4"
+              width="100%"
+              height="auto"
+              alt="{{ block.settings.title | escape }}"
+              loading="lazy"
+            >
+            <p class="mb-0">{{ block.settings.title }}</p>
+          </div>
+        {% endfor %}
+      </div>
+
+      <!-- Controls (optional; will only show if Swiper CSS is present) -->
+      <div class="swiper-button-prev" id="necesitas-prev-{{ section.id }}"></div>
+      <div class="swiper-button-next" id="necesitas-next-{{ section.id }}"></div>
+    </div>
+  </div>
+</section>

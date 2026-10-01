@@ -1,0 +1,36 @@
+{% schema %}
+{
+  "name": "Descripción del servicio",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "¿En qué consiste el servicio Medi Pedi?"
+    },
+    {
+      "type": "richtext",
+      "id": "descripcion",
+      "label": "Descripción"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Vídeo"
+    }
+  ]
+}
+{% endschema %}
+<section class="carma-servicio-descripcion my-5 pt-5 pb-sm-5">
+  <div class="container mt-sm-5 pt-sm-5 mb-lg-5 pb-lg-5">
+    <div class="row custom-gx gy-5 align-items-center">
+      <div class="col-lg-6 order-2 order-lg-1">
+        {% render 'carma-video', video: section.settings.video %}
+      </div>
+      <div class="col-lg-6 order-1 order-lg-2">
+        <h1 class="mb-5">{{ section.settings.title }}</h1>
+        <div class="descripcion fw-light">{{ section.settings.descripcion }}</div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,95 @@
+{% schema %}
+{
+  "name": "Personal",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "title",
+      "label": "Título"
+    },
+    {
+      "type": "textarea",
+      "label": "Descripción",
+      "id": "description",
+      "default": "En Casa Muñoz, nuestros personal recibe capacitación periódica por especialistas internacionales para ofrecer el exclusivo servicio de Medi Pedi, donde fusionamos estética, salud y cuidado de los pies."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "colaborador",
+      "name": "Colaborador",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Imágen"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Nombre"
+        },
+        {
+          "type": "text",
+          "id": "sucursal",
+          "label": "Sucursal"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+<section class="carma-sobre-nosotros-personal my-5 py-5">
+  <div class="container my-sm-5 pb-5 pt-sm-5">
+    <div class="row justify-content-center">
+      <div class="col-md-9">
+        <div class="text-center mb-5 mt-4 h2 titular">{{- section.settings.title -}}</div>
+        <p class="text-center fw-light">{{- section.settings.description -}}</p>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row justify-content-center align-items-center flex-nowrap">
+      <div class="col-auto">
+        <div class="swiper-customized-prev">
+          <img src="{{ '4240.svg' | asset_url }}" width="auto" height="auto">
+        </div>
+      </div>
+      <div class="col col-lg-9" style="min-width: 0;">
+        <div class="personal swiper">
+          <div class="swiper-wrapper">
+            {% for block in section.blocks %}
+              <div class="swiper-slide">
+                <div class="card border-0 mb-5">
+                  {% if block.settings.image %}
+                    <img
+                      class="img-fluid rounded"
+                      src="{{ block.settings.image | image_url }}"
+                      alt="{{ block.settings.title }}"
+                      width="100%"
+                      height="auto"
+                    >
+                  {% endif %}
+                  <div class="card-body text-center">
+                    {% if block.settings.title %}
+                      <p class="aqua mb-1 text-sm">{{ block.settings.title }}</p>
+                    {% endif %}
+                    {% if block.settings.sucursal %}
+                      <p class="mb-0 text-sm">{{ block.settings.sucursal }}</p>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+      </div>
+      <div class="col-auto">
+        <div class="swiper-customized-next">
+          <img src="{{ '4241.svg' | asset_url }}" width="auto" height="auto">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

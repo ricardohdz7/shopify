@@ -1,0 +1,201 @@
+{% schema %}
+{
+  "name": "Header de servicios",
+  "presets": [
+    {
+      "name": "Header de servicios"
+    }
+  ],
+  "settings": [
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Texto del enlace",
+      "default": "Regresar a la tienda"
+    },
+    {
+      "type": "url",
+      "id": "enlace",
+      "label": "Destino del enlace",
+      "default": "/collections/all"
+    },
+    {
+      "type": "image_picker",
+      "id": "Logo",
+      "label": "Logo"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "menu",
+      "name": "Servicio",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Texto"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "enlace"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+{% style %}
+  .top-menu,
+  .carma-header,
+  .carma-mobile-menu,
+  .carma-header-bar {
+    display: none !important;
+  }
+{% endstyle %}
+<header class="service-header mb-3">
+  <section class="go-back container">
+    <a
+      class="d-flex text-white text-decoration-none column-gap-3 py-3 align-items-center"
+      href="{{- section.settings.enlace -}}"
+    >
+      <img class="icon" width="auto" height="auto" src="{{ '5730.svg' | asset_url }}">
+      {{ section.settings.text }}
+    </a>
+  </section>
+  <section class="menu py-3 d-none d-md-block">
+    {%- assign total = section.blocks.size -%}
+    {%- assign midpoint = total | divided_by: 2 -%}
+
+    {%- comment -%}
+      Liquid no permite usar filtros (| modulo) directamente dentro del `if`.
+      Calculamos primero el residuo y luego comparamos.
+    {%- endcomment -%}
+    {%- assign total_mod_2 = total | modulo: 2 -%}
+    {%- if total_mod_2 == 1 -%}
+      {%- assign midpoint = midpoint | plus: 1 -%}
+    {%- endif -%}
+
+    {%- assign insert_logo_at = midpoint | plus: 1 -%}
+
+    <nav class="service-menu" aria-label="Servicios">
+      <ul class="service-menu__list list-unstyled d-flex align-items-center justify-content-between mb-0">
+        {%- for block in section.blocks -%}
+          {%- if forloop.index == insert_logo_at -%}
+            <li class="service-menu__logo" aria-hidden="true">
+              {%- if section.settings.Logo != blank -%}
+                <img
+                  src="{{ section.settings.Logo | image_url }}"
+                  alt="{{ shop.name | escape }}"
+                  width="auto"
+                  height="auto"
+                  loading="lazy"
+                >
+              {%- endif -%}
+            </li>
+          {%- endif -%}
+
+          {%- assign link_title = block.settings.title -%}
+          {%- assign link_url = block.settings.url -%}
+          {%- if link_title != blank and link_url != blank -%}
+            {%- assign is_current = false -%}
+            {%- assign link_url_with_slash = link_url | append: '/' -%}
+            {%- if request.path == link_url or request.path == link_url_with_slash -%}
+              {%- assign is_current = true -%}
+            {%- endif -%}
+
+            <li
+              class="service-menu__item{% if is_current %} current_link{% endif %}"
+              {{ block.shopify_attributes }}
+            >
+              <a
+                class="service-menu__link text-decoration-none"
+                href="{{ link_url }}"
+                {% if is_current %}
+                  aria-current="page"
+                {% endif %}
+              >
+                {{ link_title }}
+              </a>
+            </li>
+          {%- endif -%}
+        {%- endfor -%}
+
+        {%- comment -%}
+          Si el logo debe aparecer aunque no haya links en la segunda mitad,
+          lo insertamos al final cuando el loop nunca alcanzó `insert_logo_at`.
+        {%- endcomment -%}
+        {%- if total == 0 and section.settings.Logo != blank -%}
+          <li class="service-menu__logo" aria-hidden="true">
+            <img
+              src="{{ section.settings.Logo | image_url: width: 600 }}"
+              alt="{{ shop.name | escape }}"
+              width="auto"
+              height="auto"
+              loading="lazy"
+            >
+          </li>
+        {%- endif -%}
+      </ul>
+    </nav>
+  </section>
+  <section class="menu-movil d-md-none">
+    <nav class="navbar navbar-light bg-white" aria-label="Servicios">
+      <div class="container">
+        <a class="navbar-brand" href="{{ routes.root_url }}">
+          {%- if section.settings.Logo != blank -%}
+            <img
+              src="{{ section.settings.Logo | image_url }}"
+              alt="{{ shop.name | escape }}"
+              width="auto"
+              height="auto"
+              loading="lazy"
+            >
+          {%- else -%}
+            {{ shop.name }}
+          {%- endif -%}
+        </a>
+
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#servicesNavbarCollapse-{{ section.id }}"
+          aria-controls="servicesNavbarCollapse-{{ section.id }}"
+          aria-expanded="false"
+          aria-label="Abrir menú"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="servicesNavbarCollapse-{{ section.id }}">
+          <ul class="navbar-nav my-4">
+            {%- for block in section.blocks -%}
+              {%- assign link_title = block.settings.title -%}
+              {%- assign link_url = block.settings.url -%}
+              {%- if link_title != blank and link_url != blank -%}
+                {%- assign is_current = false -%}
+                {%- assign link_url_with_slash = link_url | append: '/' -%}
+                {%- if request.path == link_url or request.path == link_url_with_slash -%}
+                  {%- assign is_current = true -%}
+                {%- endif -%}
+
+                <li class="nav-item" {{ block.shopify_attributes }}>
+                  <a
+                    class="nav-link{% if is_current %} current_link{% endif %}"
+                    href="{{ link_url }}"
+                    {% if is_current %}
+                      aria-current="page"
+                    {% endif %}
+                  >
+                    {{ link_title }}
+                  </a>
+                </li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </section>
+</header>

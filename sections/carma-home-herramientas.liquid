@@ -1,0 +1,89 @@
+{% schema %}
+{
+  "name": "Herramientas",
+  "presets": [
+    {
+      "name": "Herramientas"
+    }
+  ],
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Nombre de la colección",
+      "default": "Pies y manos"
+    },
+    {
+      "type": "text",
+      "id": "titulo",
+      "label": "Título",
+      "default": "Herramientas profesionales"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Descripción",
+      "default": "Eleva tu nivel de manicura y pedicura al siguiente nivel."
+    },
+    {
+      "type": "text",
+      "id": "boton_texto",
+      "label": "Texto del botón",
+      "default": "Ver todo"
+    },
+    {
+      "type": "url",
+      "id": "url",
+      "label": "Enlace del botón"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Imágen de fondo"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Seleccionar producto"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+<section class="herramientas my-lg-5 py-5">
+  <div class="container my-sm-5 py-5">
+    <div class="row gx-5 custom-gy">
+      <div
+        class="col-lg-4 rounded fondo d-flex align-items-end overflow-hidden position-relative"
+        style="background-image:url('{{- section.settings.image | image_url -}}')"
+      >
+        <div class="py-5 px-4 text-white">
+          <p class="text-uppercase mt-5 pt-5 mt-lg-0 pt-lg-0">{{- section.settings.title -}}</p>
+          <h1 class="my-4">{{- section.settings.titulo -}}</h1>
+          <p class="mb-5">{{- section.settings.description -}}</p>
+          <a href="{{ section.settings.url }}" class="boton white">{{ section.settings.boton_texto }}</a>
+        </div>
+      </div>
+      <div class="col">
+        <div class="row custom-gy">
+          {% for block in section.blocks %}
+            {% if block.settings.product %}
+              <div class="col-md-6">
+                {% assign product = all_products[block.settings.product] %}
+                {% render 'carma-product-horizontal', product: product %}
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,98 @@
+{% schema %}
+{
+  "name": "Encuentra el producto",
+  "presets": [
+    {
+      "name": "Encuentra el producto"
+    }
+  ],
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Imagen de fondo"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "Encuentra el producto exacto"
+    },
+    {
+      "type": "header",
+      "content": "Formulario"
+    },
+    {
+      "type": "text",
+      "id": "formtitle",
+      "label": "Encabezado",
+      "default": "¿Cuáles son tu síntomas?"
+    },
+    {
+      "type": "text",
+      "id": "button",
+      "label": "Texto del botón",
+      "placeholder": "Buscar productos"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "sintoma",
+      "name": "Síntoma",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Opción:"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Enlace"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+<section class="encuentra-el-producto py-5" style="background-image:url('{{- section.settings.image | image_url -}}')">
+  <div class="container my-5 py-lg-5">
+    <div class="my-5 py-5">
+      <h1 class="text-white text-center mb-5 pb-5">{{- section.settings.title -}}</h1>
+      <div class="row justify-content-center">
+        <div class="col-lg-6">
+          <div class="rounded bg-white p-5">
+            <div class="p-5">
+              <h3 class="text-center mb-5">{{- section.settings.formtitle -}}</h3>
+              <form>
+                <select class="p-4 text-center mb-5" required>
+                  <option selected disabled value="">Seleccionar</option>
+                  {% for block in section.blocks %}
+                    <option value="{{- block.settings.link -}}">{{- block.settings.title -}}</option>
+                  {% endfor %}
+                </select>
+                <div class="pt-5">
+                  <button type="submit" class="p-3">{{- section.settings.button -}}</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const form = document.querySelector('.encuentra-el-producto form');
+    const select = form.querySelector('select');
+
+    form.addEventListener('submit', function (e) {
+      const value = select.value;
+      if (value) {
+        e.preventDefault();
+        window.location.href = value;
+      }
+    });
+  });
+</script>

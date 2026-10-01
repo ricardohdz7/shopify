@@ -1,0 +1,111 @@
+{% schema %}
+{
+  "name": "Servicio",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subtitulo",
+      "label": "Subtítulo",
+      "default": "SERVICIO"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Nombre del servicio",
+      "default": "Medi Pedi"
+    },
+    {
+      "type": "text",
+      "id": "title-next",
+      "label": "título",
+      "default": "La salud de tus pies en manos expertas"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Descripción",
+      "default": "Más allá de la estética, un tratamiento especializado para prevenir y corregir afecciones, asegurando la salud integral de tus pies"
+    },
+    {
+      "type": "text",
+      "id": "boton-text",
+      "label": "Texto del botón",
+      "default": "Solicitar una cita"
+    },
+    {
+      "type": "url",
+      "id": "boton-url",
+      "label": "Enlace"
+    },
+    {
+      "type": "header",
+      "content": "Imágen"
+    },
+    {
+      "type": "image_picker",
+      "label": "Seleccionar imágen de fondo",
+      "id": "image"
+    },
+    {
+      "type": "image_picker",
+      "label": "Seleccionar imágen",
+      "id": "doctor"
+    },
+    {
+      "type": "text",
+      "id": "image-title",
+      "label": "Título",
+      "default": "Doctores altamente calificados"
+    },
+    {
+      "type": "text",
+      "id": "numero",
+      "label": "Cantidad"
+    },
+    {
+      "type": "text",
+      "id": "descripcion",
+      "label": "Descripción",
+      "default": "Servicios atendidos al año"
+    }
+  ]
+}
+{% endschema %}
+<section class="carma-servicio-header mt-5 mt-lg-0">
+  <div class="container-fluid">
+    <div class="row justify-content-between gy-5">
+      <div class="col-md-6 col-lg-5">
+        <div class="contenedor-descripcion pt-lg-5">
+          <p class="aqua mt-4 mt-lg-5 pt-lg-5 mb-4">{{ section.settings.subtitulo }}</p>
+          <h1 class="fw-semibold">{{ section.settings.title }}</h1>
+          <h1 class="fw-normal mb-5">{{ section.settings['title-next'] }}</h1>
+          <p class="fw-light mb-5">{{ section.settings.text }}</p>
+          <a href="{{ section.settings.boton-url }}" class="boton aqua">{{ section.settings['boton-text'] }}</a>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="pt-4 px-4 position-relative">
+          <img src="{{ section.settings.image | image_url }}" width="100%" height="auto" class="rounded">
+          <div class="p-2 tarjeta m-5 rounded-4">
+            <div class="row align-items-center">
+              <div class="col-5 col-sm-4 col-md-5">
+                <img src="{{ section.settings.doctor | image_url }}" width="100%" height="auto" class="rounded-4">
+              </div>
+              <div class="col">
+                <p class="title-image">{{ section.settings['image-title'] }}</p>
+                <div class="row g-2 align-items-center">
+                  <div class="col-auto">
+                    <h3 class="aqua fw-semibold m-0">{{ section.settings.numero }}</h3>
+                  </div>
+                  <div class="col">
+                    <p class="text-sm m-0">{{ section.settings.descripcion }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

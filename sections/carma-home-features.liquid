@@ -1,0 +1,73 @@
+{% schema %}
+{
+  "name": "Features",
+  "presets": [
+    {
+      "name": "Features"
+    }
+  ],
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Color de fondo",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Color de texto",
+      "default": "#2E2E2E"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Feature",
+      "type": "feature",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Título"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Ícono"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+<div
+  class="features py-4"
+  style="background: {{ section.settings.background_color }}; color: {{ section.settings.text_color }};"
+>
+  <div class="container">
+    <div class="d-none d-lg-flex align-items-center justify-content-between flex-column flex-lg-row row-gap-3">
+      {% for block in section.blocks %}
+        <div class="d-flex align-items-center column-gap-3">
+          <img width="auto" height="auto" src="{{ block.settings.icon | image_url }}" class="icon">
+          <p class="m-0">{{ block.settings.name }}</p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="d-lg-none">
+    <div class="swiper marquee-swiper">
+      <div class="swiper-wrapper">
+        {% for i in (1..2) %}
+          {% for block in section.blocks %}
+            <div class="swiper-slide">
+              <div class="d-flex align-items-center column-gap-3">
+                <img width="auto" height="auto" src="{{ block.settings.icon | image_url }}" class="icon">
+                <p class="m-0">{{ block.settings.name }}</p>
+              </div>
+            </div>
+          {% endfor -%}
+        {% endfor -%}
+      </div>
+    </div>
+  </div>
+</div>

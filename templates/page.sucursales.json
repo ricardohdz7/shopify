@@ -1,0 +1,283 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "carma-sucursales-main",
+      "blocks": {
+        "sucursal_QTacLd": {
+          "type": "sucursal",
+          "settings": {
+            "title": "Surf City",
+            "address": "LOCAL. 3, CTRO. COM. THE SPOT SURF CITY,, LA LIBERTAD COSTA, LA LIBERTAD",
+            "enlace-text": "Ir con Waze",
+            "enlace": "#"
+          }
+        },
+        "sucursal_BNygYq": {
+          "type": "sucursal",
+          "settings": {
+            "title": "Galerias",
+            "address": "ENTRE 71 Y 73 AV. NORTE, LOCAL 32-P0003, COL. ESCALON, CENTRO COMERCIAL GALERIAS, COMERCIO 2, MODULO 4, SAN SALVADOR CENTRO, SAN SALVADOR",
+            "enlace-text": "Ir con Waze",
+            "enlace": "#"
+          }
+        },
+        "sucursal_wXzQym": {
+          "type": "sucursal",
+          "settings": {
+            "title": "Plaza Mundo Usulután",
+            "address": "KM 119, DE LA CARRETERA DEL LITORAL, CA-2 Y RUTA NACIONAL 14, LOCAL COM-01-093, CTRO COM. PLAZA MUNDO, USULUTAN ESTE, USULUTANCel: +503 7295-2875",
+            "enlace-text": "Ir con Waze",
+            "enlace": "#"
+          }
+        },
+        "sucursal_JpBV6W": {
+          "type": "sucursal",
+          "settings": {
+            "title": "Sensuntepeque",
+            "address": "5TA AVENIDA, NORTE, # 8, SENSUNTEPEQUE, CABAÑAS, Cel: +503 77523049",
+            "enlace-text": "Ir con Waze",
+            "enlace": "#"
+          }
+        },
+        "sucursal_naYEqR": {
+          "type": "sucursal",
+          "settings": {
+            "title": "Las Ramblas",
+            "address": "Calle Panamericana, Finca El Carmen, Porción A. Local 201. Santa Tecla, La Libertad.",
+            "enlace-text": "Ir con Waze",
+            "enlace": ""
+          }
+        },
+        "sucursal_jeh7ax": {
+          "type": "sucursal",
+          "settings": {
+            "title": "El Encuentro Lourdes",
+            "address": "Centro Comercial El Encuentro Local #7, Carretera Panamericana 27, Km. 24 1/2 Carretera a Santa AnaLourdes Colón, La Libertad.",
+            "enlace-text": "Ir con Waze",
+            "enlace": ""
+          }
+        },
+        "sucursal_A7RKa8": {
+          "type": "sucursal",
+          "settings": {
+            "title": "Plaza Mundo Apopa",
+            "address": "Carretera Troncal Del Norte km 12 Centro Comercial Plaza Mundo, 2da. planta, local COM-02-051 Apopa San Salvador, San Salvador.",
+            "enlace-text": "Ir con Waze",
+            "enlace": ""
+          }
+        },
+        "sucursal_Dy7M36": {
+          "type": "sucursal",
+          "settings": {
+            "title": "Plaza Mundo Soyapango",
+            "address": "Centro Comercial Plaza Mundo, 2do Nivel Local COM-02-020 Boulevard del Ejercito Nacional Km. 4 1/2 y Calle Montecarmelo, Soyapango, San Salvador",
+            "enlace-text": "Ir con Waze",
+            "enlace": ""
+          }
+        },
+        "sucursal_c6Q9Rn": {
+          "type": "sucursal",
+          "settings": {
+            "title": "Metrosur",
+            "address": "Centro Comercial Metrosur, Boulevard Los Héroes, Colonia Miramonte, San Salvador, San Salvador.",
+            "enlace-text": "Ir con Waze",
+            "enlace": ""
+          }
+        },
+        "sucursal_md4izn": {
+          "type": "sucursal",
+          "settings": {
+            "title": "Metrocetro SS",
+            "address": "Centro Comercial Metrocentro, Boulevard Los Héroes, Colonia Miramonte. 6ta Etapa San Salvador, San Salvador.",
+            "enlace-text": "Ir con Waze",
+            "enlace": ""
+          }
+        },
+        "sucursal_AH8NVL": {
+          "type": "sucursal",
+          "settings": {
+            "title": "La Joya",
+            "address": "Centro Comercial La Joya local #35, Carretera al Puerto de La Libertad, Santa Tecla, La Libertad.",
+            "enlace-text": "Ir con Waze",
+            "enlace": ""
+          }
+        },
+        "sucursal_KP6a3W": {
+          "type": "sucursal",
+          "settings": {
+            "title": "Las Cascadas",
+            "address": "Carretera Panamericana Local #207 2da. Planta Centro Comercial Hiper Mall Las Cascadas, Antiguo Cuscatlán, La Libertad.",
+            "enlace-text": "Ir con Waze",
+            "enlace": ""
+          }
+        },
+        "sucursal_QpCKVh": {
+          "type": "sucursal",
+          "settings": {
+            "title": "Metrocentro Santa Ana",
+            "address": "C.C. Metrocentro Santa Ana. Local 265-C, 2da Etapa, Colonia Loma Linda, final avenida Independencia Sur y by pass, Santa Ana, El Salvador.",
+            "enlace-text": "Ir con Waze",
+            "enlace": "#"
+          }
+        },
+        "sucursal_McJ7Dp": {
+          "type": "sucursal",
+          "settings": {
+            "title": "Plaza Merliot",
+            "address": "Calle Chiltiupán, 3° planta",
+            "enlace-text": "Ir con Waze",
+            "enlace": "#"
+          }
+        },
+        "sucursal_gDXXhP": {
+          "type": "sucursal",
+          "settings": {
+            "title": "El Encuentro Sonsonate",
+            "address": "Centro Comercial El Encuentro Sonsonate, Intersección de By-Pass de Sonsonate a Acajutla y calle a Nahulingo, Barrio El Ángel. Ciudad de Sonsonate, Sonsonate.",
+            "enlace-text": "Ir con Waze",
+            "enlace": "#"
+          }
+        },
+        "sucursal_hfB3zH": {
+          "type": "sucursal",
+          "disabled": true,
+          "settings": {
+            "title": "Metrocentro San Salvador",
+            "address": "2da etapa Local 265",
+            "enlace-text": "Ir con Waze",
+            "enlace": "#"
+          }
+        },
+        "sucursal_KMdd47": {
+          "type": "sucursal",
+          "disabled": true,
+          "settings": {
+            "title": "Plaza Merliot",
+            "address": "Calle Chiltiupán, 3° planta",
+            "enlace-text": "Ir con Waze",
+            "enlace": "#"
+          }
+        },
+        "sucursal_QEbzqA": {
+          "type": "sucursal",
+          "disabled": true,
+          "settings": {
+            "title": "El Encuentro Sonsonate",
+            "address": "Intersección de By-Pass de Sonsonate a Acajutla",
+            "enlace-text": "Ir con Waze",
+            "enlace": "#"
+          }
+        },
+        "sucursal_Q8hjE4": {
+          "type": "sucursal",
+          "disabled": true,
+          "settings": {
+            "title": "",
+            "address": "",
+            "enlace-text": "",
+            "enlace": ""
+          }
+        }
+      },
+      "block_order": [
+        "sucursal_QTacLd",
+        "sucursal_BNygYq",
+        "sucursal_wXzQym",
+        "sucursal_JpBV6W",
+        "sucursal_naYEqR",
+        "sucursal_jeh7ax",
+        "sucursal_A7RKa8",
+        "sucursal_Dy7M36",
+        "sucursal_c6Q9Rn",
+        "sucursal_md4izn",
+        "sucursal_AH8NVL",
+        "sucursal_KP6a3W",
+        "sucursal_QpCKVh",
+        "sucursal_McJ7Dp",
+        "sucursal_gDXXhP",
+        "sucursal_hfB3zH",
+        "sucursal_KMdd47",
+        "sucursal_QEbzqA",
+        "sucursal_Q8hjE4"
+      ],
+      "settings": {
+        "subtitle": "SUCURSALES",
+        "title": "Más de 15 sucursales en todo el país",
+        "buscador": "Buscar sucursal",
+        "image": "shopify://shop_images/preguntasfrecuentes-PREGUNTAS_FRECUENTES_copia_2.webp"
+      }
+    },
+    "galeria": {
+      "type": "carma-galeria",
+      "blocks": {
+        "imagen_aHQegK": {
+          "type": "imagen",
+          "settings": {
+            "image": "shopify://shop_images/MediPedi.webp"
+          }
+        },
+        "imagen_fYWwjL": {
+          "type": "imagen",
+          "settings": {
+            "image": "shopify://shop_images/LASER.webp"
+          }
+        },
+        "imagen_FCzeFf": {
+          "type": "imagen",
+          "settings": {
+            "image": "shopify://shop_images/Carrusel-servicios-galeriaMesa_de_trabajo_8.webp"
+          }
+        },
+        "imagen_MErEe9": {
+          "type": "imagen",
+          "settings": {
+            "image": "shopify://shop_images/BS_BRACE.webp"
+          }
+        },
+        "imagen_qrRUkR": {
+          "type": "imagen",
+          "settings": {
+            "image": "shopify://shop_images/Mani.webp"
+          }
+        },
+        "imagen_HJ39LK": {
+          "type": "imagen",
+          "settings": {
+            "image": "shopify://shop_images/Carrusel-servicios-galeriaMesa_de_trabajo_8_copia.webp"
+          }
+        },
+        "imagen_3YqtVW": {
+          "type": "imagen",
+          "settings": {
+            "image": "shopify://shop_images/Carrusel-servicios-galeriaMesa_de_trabajo_8_copia_2.webp"
+          }
+        }
+      },
+      "block_order": [
+        "imagen_aHQegK",
+        "imagen_fYWwjL",
+        "imagen_FCzeFf",
+        "imagen_MErEe9",
+        "imagen_qrRUkR",
+        "imagen_HJ39LK",
+        "imagen_3YqtVW"
+      ],
+      "settings": {
+        "title": "Galería"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "galeria"
+  ]
+}

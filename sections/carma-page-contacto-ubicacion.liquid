@@ -1,0 +1,13 @@
+{% schema %}
+{
+  "name": "Ubicación",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "ubicacion",
+      "label": "Código de Google Maps"
+    }
+  ]
+}
+{% endschema %}
+{{ section.settings.ubicacion | raw }}

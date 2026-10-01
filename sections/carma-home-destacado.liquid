@@ -1,0 +1,47 @@
+{% schema %}
+{
+  "name": "Baner destacado",
+  "presets": [
+    {
+      "name": "Baner destacado"
+    }
+  ],
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Imágen para escritorio"
+    },
+    {
+      "type": "image_picker",
+      "id": "imagemovil",
+      "label": "Imágen para móvil"
+    },
+    {
+      "type": "url",
+      "id": "url",
+      "label": "Enlace"
+    }
+  ]
+}
+{% endschema %}
+<a href="{{- section.settings.url -}}">
+  <picture>
+    {%- if section.settings.imagemovil != blank -%}
+      <source
+        media="(max-width: 767px)"
+        srcset="{{ section.settings.imagemovil | image_url }}"
+      >
+    {%- endif -%}
+    {%- if section.settings.image != blank -%}
+      <img
+        src="{{ section.settings.image | image_url }}"
+        alt=""
+        class="img-fluid"
+        loading="lazy"
+        width="100%"
+        height="auto"
+      >
+    {%- endif -%}
+  </picture>
+</a>

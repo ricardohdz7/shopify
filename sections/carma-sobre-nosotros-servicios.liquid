@@ -1,0 +1,144 @@
+{% schema %}
+{
+  "name": "Servicios",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subtitulo",
+      "label": "Subtítulo",
+      "default": "NUESTROS SERVICIOS"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "¿Tienes problemas con tus pies o uñas?"
+    },
+    {
+      "type": "text",
+      "id": "descripcion",
+      "label": "Descripción",
+      "default": "En Casa Muñoz nos especializamos en ofrecer servicios innovadores y una atención integral, con 4 servicios para el cuidado y bienestar de tus manos y pies."
+    },
+    {
+      "type": "text",
+      "id": "titulo-servicios",
+      "label": "Título servicios",
+      "default": "Conoce cada uno de nuestros servicios."
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Color de fondo",
+      "default": "#fdfbfb"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "servicio",
+      "name": "Servicio",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Imágen"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Nombre"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Enlace"
+        }
+      ]
+    },
+    {
+      "type": "imagen",
+      "name": "Imágen",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "imagen",
+          "label": "Imágen"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+<section class="carma-sobre-nosotros-servicios py-5" style="background-color:{{ section.settings.background }}">
+  <div class="container py-5">
+    <div class="row justify-content-between gy-5">
+      <!-- Columna izquierda: Texto e iconos -->
+      <div class="col-lg-5">
+        <p class="aqua">
+          {{ section.settings.subtitulo }}
+        </p>
+        <h1 class="my-5">{{ section.settings.title }}</h1>
+        <div class="fw-light">
+          {{ section.settings.descripcion }}
+        </div>
+        <p class="my-5">{{ section.settings['titulo-servicios'] }}</p>
+
+        <div class="row justify-content-between gy-5">
+          {% for block in section.blocks %}
+            {% if block.type == 'servicio' %}
+              <div class="col-auto">
+                <a
+                  href="{{ block.settings.url | default: '#' }}"
+                  class="text-decoration-none d-block text-center text-black service-link"
+                >
+                  <div>
+                    {% if block.settings.image %}
+                      <img
+                        src="{{ block.settings.image | image_url }}"
+                        alt="{{ block.settings.title | escape }}"
+                        class="mx-auto d-block service"
+                        width="100%"
+                        height="auto"
+                      >
+                    {% endif %}
+                  </div>
+                  <div class="d-flex align-items-center mt-4 justify-content-between">
+                    <p class="m-0 hover">{{ block.settings.title }}</p>
+                    <img src="{{- '4248.svg' | asset_url -}}" width="auto" height="auto" class="icon">
+                  </div>
+                </a>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+      <!-- Columna derecha: Imagen -->
+      <div class="col-lg-6">
+        <div class="swiper carma-sobre-nosotros-servicios-swiper">
+          <div class="swiper-wrapper">
+            {% for block in section.blocks %}
+              {% if block.type == 'imagen' %}
+                <div class="swiper-slide">
+                  <img
+                    src="{{ block.settings.imagen | image_url }}"
+                    class="img-fluid rounded"
+                    alt="Imagen servicios"
+                    width="100%"
+                    height="auto"
+                  >
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+          <div class="swiper-button-next">
+            <img src="{{ '4241.svg' | asset_url }}" width="auto" height="auto">
+          </div>
+          <div class="swiper-button-prev">
+            <img src="{{ '4240.svg' | asset_url }}" width="auto" height="auto">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

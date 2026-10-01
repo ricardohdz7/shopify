@@ -1,0 +1,71 @@
+{% schema %}
+{
+  "name": "Innovación",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Imágen"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "La innovación y calidad nos distinguen"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Descripción"
+    },
+    {
+      "type": "text",
+      "id": "boton-text",
+      "label": "Texto del botón"
+    },
+    {
+      "type": "url",
+      "id": "boton-enlace",
+      "label": "Enlace del botón"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "features",
+      "name": "Features",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Añadir texto"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+<section
+  class="carma-sobre-nosotros-innovacion pb-5"
+  style="background-image:url('{{- '4238.svg' | asset_url -}}')"
+>
+  <div class="container mb-5">
+    <div class="row justify-content-between gy-5">
+      <div class="col-md-5 col-lg-6">
+        <img src="{{- section.settings.image | image_url -}}" width="100%" height="auto" class="rounded">
+      </div>
+      <div class="col-md-7 col-lg-5">
+        <h1 class="mt-lg-5 fw-semibold mb-0">{{- section.settings.title -}}</h1>
+        <div class="texto fw-light my-5 my-md-4 my-lg-5">{{- section.settings.text -}}</div>
+        <a href="{{- section.settings.boton-enlace -}}" class="boton black">{{- section.settings['boton-text'] -}}</a>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="carma-sobre-nosotros-innovacion-features marquee py-4">
+  {% for block in section.blocks %}
+    <div>
+      <h3 class="mb-0 text-white">{{- block.settings.title -}}</h3>
+    </div>
+    <div class="mx-5"><h3 class="mb-0 aqua">٭</h3></div>
+  {% endfor %}
+</section>

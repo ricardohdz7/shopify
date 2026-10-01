@@ -1,0 +1,20 @@
+{%- comment -%}
+  Snippet: carma-blog-card.liquid
+  Parámetro requerido: blog (un artículo del blog)
+{%- endcomment -%}
+<div class="card rounded h-100 carma-blog-card">
+  <img
+    src="{{ blog.image | image_url }}"
+    class="card-img-top rounded"
+    alt="{{ blog.title }}"
+    width="100%"
+    height="auto"
+  >
+  <div class="card-body px-5 d-flex flex-column justify-content-between">
+    <h4 class="card-title mt-4">{{ blog.title }}</h4>
+    <p class="card-text fw-light mt-3">
+      {{ blog.published_at | date: '%d de %B, %Y' }}
+    </p>
+    <a href="{{ blog.url }}" class="enlace mb-4">LEER MÁS</a>
+  </div>
+</div>

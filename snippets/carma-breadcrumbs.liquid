@@ -1,0 +1,37 @@
+<p class="breadcrumbs">
+  <a href="{{ routes.root_url }}">INICIO</a>
+
+  {% if template contains 'cart' %}
+    / CARRITO
+
+  {% elsif template contains 'collection' %}
+    {% if collection %}
+      / <a href="{{ routes.collections_url }}">CATEGORÍAS</a> / {{ collection.title }}
+    {% else %}
+      / CATEGORÍAS
+    {% endif %}
+
+  {% elsif template contains 'product' %}
+    {% if collection %}
+      / <a href="{{ routes.collections_url }}">CATEGORÍAS</a> /
+      <a href="{{ collection.url }}">{{ collection.title }}</a>
+    {% endif %}
+    / {{ product.title }}
+
+  {% elsif template contains 'article' %}
+    {% if blog %}
+      / <a href="{{ blog.url }}">{{ blog.title }}</a>
+    {% endif %}
+    {% if article %}
+      / <span class="article-name">{{ article.title }}</span>
+    {% endif %}
+
+  {% elsif template contains 'blog' %}
+    {% if blog %}
+      / {{ blog.title }}
+    {% endif %}
+
+  {% elsif template contains 'page' %}
+    / {{ page.title }}
+  {% endif %}
+</p>

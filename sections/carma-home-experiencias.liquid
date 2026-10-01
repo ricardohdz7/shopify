@@ -1,0 +1,60 @@
+{% schema %}
+{
+  "name": "Testimonios",
+  "presets": [
+    {
+      "name": "Testimonios"
+    }
+  ],
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "Experiencias de nuestros clientes"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonio",
+      "name": "Testimonio",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Seleccionar vídeo"
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Seleccionar producto"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+<section class="carma-experiencias py-5">
+  <div class="container">
+    {% if section.settings.title != blank %}
+      <h1 class="mb-5 pb-5 fw-semibold">{{ section.settings.title }}</h1>
+    {% endif %}
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 justify-content-center">
+      {% for block in section.blocks %}
+        <div class="col">
+          <div class="carma-experiencia-card position-relative">
+            {% if block.settings.video %}
+              {% render 'carma-video', video: block.settings.video %}
+            {% endif %}
+            {% if block.settings.product != blank %}
+              <div class="carma-producto-snippet position-absolute bottom-0 start-0 w-100 p-sm-4">
+                {% render 'carma-product-horizontal', product: block.settings.product %}
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>

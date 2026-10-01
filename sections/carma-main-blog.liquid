@@ -1,0 +1,52 @@
+{% schema %}
+{
+  "name": "Blog",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Descripción del blog",
+      "default": "Descubre tips y artículos para cuidar el bienestar de tus manos y pies."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Imágen de fondo"
+    },
+    {
+      "type": "number",
+      "id": "quantity",
+      "label": "Cantidad de blogs a mostrar",
+      "default": 9
+    }
+  ]
+}
+{% endschema %}
+<section class="carma-main-blog">
+  <div
+    class="encabezado py-5 position-relative"
+    style="background-image:url('{{ section.settings.image | image_url }}')"
+  >
+    <div class="container my-sm-5 py-sm-5 position-relative z-2">
+      <div class="row justify-content-end my-5 py-5">
+        <div class="col-md-6 col-lg-5">
+          <h2 class="text-white">{{ section.settings.title }}</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="carma-blog-posts my-5 py-5">
+    {% paginate blog.articles by section.settings.quantity %}
+      <div class="container my-sm-5 py-sm-5">
+        <div class="row custom-gy">
+          {% for article in blog.articles %}
+            <div class="col-12 col-md-6 col-lg-4">
+              {% render 'carma-blog-card', blog: article %}
+            </div>
+          {% endfor %}
+        </div>
+        {% render 'carma-pagination', paginate: paginate %}
+      </div>
+    {% endpaginate %}
+  </div>
+</section>

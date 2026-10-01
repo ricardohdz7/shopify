@@ -1,0 +1,43 @@
+{% schema %}
+{
+  "name": "Productos relacionados",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título de productos recomendados",
+      "default": "Estos productos también son ideales para ti."
+    }
+  ]
+}
+{% endschema %}
+<section class="my-5 py-5">
+  <div class="container">
+    <h1 class="mb-sm-5 pb-5">{{ section.settings.title }}</h1>
+    <div class="row gy-5 productos-recomendados"></div>
+  </div>
+</section>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var recommendationsContainer = document.querySelector('.productos-recomendados');
+    if (!recommendationsContainer) return;
+
+    // ID del producto actual desde Shopify
+    var productId = {{ product.id }};
+    // Llama al endpoint de recomendaciones con offset 0 y limit 6
+    fetch('/recommendations/products?product_id=' + productId + '&limit=6&section_id=carma-product-recommendations')
+      .then(function(res) { return res.text(); })
+      .then(function(html) {
+        var temp = document.createElement('div');
+        temp.innerHTML = html;
+        var section = temp.querySelector('.carma-recommendations');
+        if (section) {
+          var items = section.querySelectorAll('.col-6.col-md');
+          // Saltar los primeros 2 productos, mostrar los siguientes 4
+          for (var i = 2; i < Math.min(items.length, 6); i++) {
+            recommendationsContainer.appendChild(items[i].cloneNode(true));
+          }
+        }
+      });
+  });
+</script>

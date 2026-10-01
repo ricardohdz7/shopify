@@ -1,0 +1,67 @@
+{% schema %}
+{
+  "name": "Tenemos servicios como",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "Tenemos servicios como"
+    },
+    {
+      "type": "text",
+      "id": "btn-text",
+      "label": "Texto del botón",
+      "default": "Todos los servicios"
+    },
+    {
+      "type": "url",
+      "id": "btn-link",
+      "label": "Enlace"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "servicio",
+      "name": "Servicio",
+      "limit": 5,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Seleccionar imágen"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+<section class="carma-servicio-necesitas py-5" style="background-image:url('{{ '4238.svg' | asset_url }}')">
+  <div class="container my-sm-5">
+    <div class="row align-items-center mb-5 pb-sm-4">
+      <div class="col">
+        <h1 class="text-center text-sm-start">{{ section.settings.title }}</h1>
+      </div>
+      <div class="col-auto d-none d-sm-block">
+        <a href="{{ section.settings.btn-link }}" class="boton black">{{ section.settings['btn-text'] }}</a>
+      </div>
+    </div>
+
+    <div class="row gy-4">
+      {% for block in section.blocks %}
+        <div class="col-6 col-md">
+          <img src="{{ block.settings.image | image_url }}" class="rounded mb-4" width="100%" height="auto">
+          <p>{{ block.settings.title }}</p>
+        </div>
+      {% endfor %}
+    </div>
+    <p class="text-center d-sm-none mt-5">
+      <a href="{{ section.settings.btn-link }}" class="boton black">{{ section.settings['btn-text'] }}</a>
+    </p>
+  </div>
+</section>

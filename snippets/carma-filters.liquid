@@ -1,0 +1,205 @@
+<div class="carma-filters rounded p-4">
+  <div class="encabezado py-4 rounded d-none d-md-block">
+    <div>
+      <div class="row align-items-center">
+        <div class="col">
+          <h4 class="mb-0">Filtro</h4>
+        </div>
+        <div class="col-auto">
+          <img src="{{ '4437.svg' | asset_url }}" width="auto" height="auto" class="icon-filter">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <facet-filters-form class="facet-form facets collapsible" data-section-id="{{ section_id }}">
+    <form id="FacetFiltersForm" method="get">
+      {%- if mode == 'search' -%}
+        <input type="hidden" name="q" value="{{ search_terms | escape }}">
+        <input type="hidden" name="type" value="product">
+        <input type="hidden" name="options[prefix]" value="last">
+        <input type="hidden" name="options[unavailable_products]" value="show">
+      {%- endif -%}
+
+      <div class="accordion" id="collection-filters">
+        {% assign side_menu = linklists[section.settings.menu] %}
+        {% if side_menu and side_menu.links.size > 0 %}
+          {% for link in side_menu.links %}
+            {% assign is_current_parent = false %}
+            {% assign is_current_child = false %}
+
+            {%- comment -%}
+              ¿El link padre apunta a la colección actual?
+            {%- endcomment -%}
+            {% if collection and link.url == collection.url %}
+              {% assign is_current_parent = true %}
+            {% endif %}
+
+            {% if link.links and link.links.size > 0 %}
+              {%- comment -%}
+                Revisamos si algún hijo apunta a la colección actual
+              {%- endcomment -%}
+              {% for child in link.links %}
+                {% if collection and child.url == collection.url %}
+                  {% assign is_current_child = true %}
+                {% endif %}
+              {% endfor %}
+
+              <div class="accordion-item mt-4 pt-4">
+                <h2 class="accordion-header">
+                  <button
+                    class="accordion-button px-0{% unless is_current_parent or is_current_child %} collapsed{% endunless %}"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseMenu-{{ forloop.index }}"
+                    aria-expanded="{% if is_current_parent or is_current_child %}true{% else %}false{% endif %}"
+                    aria-controls="collapseMenu-{{ forloop.index }}"
+                  >
+                    {{ link.title }}
+                  </button>
+                </h2>
+                <div
+                  id="collapseMenu-{{ forloop.index }}"
+                  class="accordion-collapse collapse{% if is_current_parent or is_current_child %} show{% endif %}"
+                  data-bs-parent="#collection-filters"
+                >
+                  <div class="accordion-body px-0">
+                    {% for child in link.links %}
+                      {% assign is_active_child = false %}
+                      {% if collection and child.url == collection.url %}
+                        {% assign is_active_child = true %}
+                      {% endif %}
+                      <p class="submenu-link mb-0">
+                        <a
+                          class="text-decoration-none sidebar-link fw-light{% if is_active_child %} active-category{% endif %}"
+                          href="{{ child.url }}"
+                        >
+                          {{- child.title -}}
+                        </a>
+                      </p>
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+            {% else %}
+              {%- comment -%}
+                Link sin hijos: lo marcamos si coincide con la colección actual
+              {%- endcomment -%}
+              {% assign is_active_parent = false %}
+              {% if collection and link.url == collection.url %}
+                {% assign is_active_parent = true %}
+              {% endif %}
+
+              <p class="menu-link fw-semibold{% if is_active_parent %} active-category-parent{% endif %}">
+                <a
+                  class="text-decoration-none{% if is_active_parent %} active-category{% endif %}"
+                  href="{{ link.url }}"
+                >
+                  {{ link.title }}
+                </a>
+              </p>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+        {%- for filter in filters -%}
+          <div class="accordion-item mt-4 pt-4">
+            <h2 class="accordion-header">
+              <button
+                class="accordion-button collapsed px-0"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseFilter-{{ forloop.index }}"
+                aria-expanded="false"
+                aria-controls="collapseFilter-{{ forloop.index }}"
+              >
+                {{ filter.label }}
+              </button>
+            </h2>
+
+            <div
+              id="collapseFilter-{{ forloop.index }}"
+              class="accordion-collapse collapse"
+              data-bs-parent="#collection-filters"
+            >
+              <div class="accordion-body px-0">
+                {% case filter.type %}
+                  {% when 'price_range' %}
+                    <price-range class="row">
+                      <!-- DESDE -->
+                      <div class="col">
+                        <label for="min-price" class="mb-2 form-check-label">DESDE</label>
+                        <input
+                          id="min-price"
+                          name="{{ filter.min_value.param_name }}"
+                          type="text"
+                          inputmode="decimal"
+                          pattern="\d*"
+                          placeholder="0"
+                          data-type="min"
+                          data-min="0"
+                          data-max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                          {% if filter.min_value.value %}
+                            value="{{ filter.min_value.value | money_without_currency | replace: ',', '' }}"
+                          {% endif %}
+                          class="form-control form-control-lg"
+                          step="1"
+                        >
+                      </div>
+
+                      <!-- HASTA -->
+                      <div class="col">
+                        <label for="max-price" class="mb-2 form-check-label">HASTA</label>
+                        <input
+                          id="max-price"
+                          name="{{ filter.max_value.param_name }}"
+                          type="text"
+                          inputmode="decimal"
+                          pattern="\d*"
+                          placeholder="{{ filter.range_max | money_without_currency }}"
+                          data-type="max"
+                          data-min="0"
+                          data-max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                          {% if filter.max_value.value %}
+                            value="{{ filter.max_value.value | money_without_currency | replace: ',', '' }}"
+                          {% endif %}
+                          class="form-control form-control-lg"
+                          step="1"
+                        >
+                      </div>
+                    </price-range>
+
+                  {% when 'list', 'boolean' %}
+                    {% for value in filter.values %}
+                      <div class="form-check">
+                        <input
+                          type="checkbox"
+                          id="filter-{{ filter.param_name }}-{{ forloop.index }}"
+                          name="{{ value.param_name }}"
+                          value="{{ value.value }}"
+                          class="form-check-input"
+                          data-url="{{ value.url_to_add }}"
+                          {% if value.active %}
+                            checked
+                          {% endif %}
+                        >
+                        <label
+                          class="form-check-label"
+                          for="filter-{{ filter.param_name }}-{{ forloop.index }}"
+                        >
+                          {{- value.label -}}
+                        </label>
+                      </div>
+                    {% endfor %}
+                {% endcase %}
+              </div>
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+
+      <noscript>
+        <button class="btn btn-primary w-100 mt-3" type="submit">Aplicar filtros</button>
+      </noscript>
+    </form>
+  </facet-filters-form>
+</div>
