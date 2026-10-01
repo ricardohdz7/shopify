@@ -48,7 +48,9 @@
     <div class="d-none d-lg-flex align-items-center justify-content-between flex-column flex-lg-row row-gap-3">
       {% for block in section.blocks %}
         <div class="d-flex align-items-center column-gap-3">
-          <img width="auto" height="auto" src="{{ block.settings.icon | image_url }}" class="icon">
+          {% if block.settings.icon != blank %}
+            <img width="auto" height="auto" src="{{ block.settings.icon | image_url }}" class="icon" alt="">
+          {% endif %}
           <p class="m-0">{{ block.settings.name }}</p>
         </div>
       {% endfor %}
@@ -61,7 +63,9 @@
           {% for block in section.blocks %}
             <div class="swiper-slide">
               <div class="d-flex align-items-center column-gap-3">
-                <img width="auto" height="auto" src="{{ block.settings.icon | image_url }}" class="icon">
+                {% if block.settings.icon != blank %}
+                  <img width="auto" height="auto" src="{{ block.settings.icon | image_url }}" class="icon" alt="">
+                {% endif %}
                 <p class="m-0">{{ block.settings.name }}</p>
               </div>
             </div>

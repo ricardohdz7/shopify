@@ -33,30 +33,52 @@
 {% endschema %}
 <div class="swiper baner">
   <div class="swiper-wrapper">
+    {% assign active_slides = 0 %}
     {% for block in section.blocks %}
-      <div class="swiper-slide">
-        <a href="{{ block.settings.enlace }}">
-          <picture>
-            {%- if block.settings.movil != blank -%}
-              <source
-                media="(max-width: 767px)"
-                srcset="{{ block.settings.movil | image_url }}"
-              >
-            {%- endif -%}
-            {%- if block.settings.image != blank -%}
-              <img
-                src="{{ block.settings.image | image_url }}"
-                alt=""
-                class="img-fluid"
-                loading="lazy"
-                width="100%"
-                height="auto"
-              >
-            {%- endif -%}
-          </picture>
-        </a>
-      </div>
+      {% if block.settings.image != blank or block.settings.movil != blank %}
+        {% assign active_slides = active_slides | plus: 1 %}
+        <div class="swiper-slide" {{ block.shopify_attributes }}>
+          <a href="{{ block.settings.enlace | default: '#' }}">
+            <picture>
+              {%- if block.settings.movil != blank -%}
+                <source
+                  media="(max-width: 767px)"
+                  srcset="{{ block.settings.movil | image_url }}"
+                >
+              {%- endif -%}
+              {%- if block.settings.image != blank -%}
+                <img
+                  src="{{ block.settings.image | image_url }}"
+                  alt=""
+                  class="img-fluid"
+                  loading="lazy"
+                  width="100%"
+                  height="auto"
+                >
+              {%- elsif block.settings.movil != blank -%}
+                <img
+                  src="{{ block.settings.movil | image_url }}"
+                  alt=""
+                  class="img-fluid"
+                  loading="lazy"
+                  width="100%"
+                  height="auto"
+                >
+              {%- endif -%}
+            </picture>
+          </a>
+        </div>
+      {% endif %}
     {% endfor %}
+
+    {% if active_slides == 0 %}
+      <div class="swiper-slide py-5 text-center bg-light">
+        <div class="p-5">
+          <h2 class="h4">Bienvenido a tu tienda Shopify</h2>
+          <p class="text-muted">Personaliza tus banners desde el editor de temas de Shopify.</p>
+        </div>
+      </div>
+    {% endif %}
   </div>
   <div class="swiper-button-next"></div>
   <div class="swiper-button-prev"></div>
