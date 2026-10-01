@@ -8,67 +8,81 @@
   ],
   "settings": [
     {
+      "type": "text",
+      "id": "title",
+      "label": "Título de la sección",
+      "default": "Nuestros Productos"
+    },
+    {
       "type": "collection",
       "id": "collection",
-      "label": "Seleccionar colección"
+      "label": "Seleccionar colección (Opcional)"
     },
     {
       "type": "number",
       "id": "quantity",
       "label": "Cantidad de productos a mostrar",
-      "default": 8
+      "default": 12
     },
     {
       "type": "text",
       "id": "text",
       "label": "Texto del botón",
-      "default": "Ver todos"
+      "default": "Ver todo el catálogo"
     }
   ]
 }
 {% endschema %}
-<section class="list-of-products py-5">
-  <div class="py-5 my-5 container">
-    {% assign target_coll = collections[section.settings.collection] %}
-    {% if target_coll == blank or target_coll.products == blank or target_coll.products.size == 0 %}
-      {% assign target_coll = collections['all'] %}
+
+<section class="list-of-products py-5 bg-light">
+  <div class="container py-4">
+    {% assign selected_coll = collections[section.settings.collection] %}
+    {% if selected_coll != blank and selected_coll.products_count > 0 %}
+      {% assign product_list = selected_coll.products %}
+      {% assign section_title = selected_coll.title %}
+    {% else %}
+      {% assign product_list = collections.all.products %}
+      {% assign section_title = section.settings.title | default: "Nuestros Productos" %}
     {% endif %}
 
-    <div class="row align-items-end mb-5 pb-3">
+    <div class="row align-items-center justify-content-between mb-4 pb-2">
       <div class="col">
-        <h1 class="fw-semibold m-0">{{ target_coll.title | default: "Productos" }}</h1>
+        <h2 class="fw-bold m-0 display-6 text-dark">{{ section_title }}</h2>
+        <p class="text-muted m-0 mt-1">Descubre nuestros productos disponibles</p>
       </div>
       <div class="col-auto">
         <a
-          href="{{ target_coll.url | default: '/collections/all' }}"
-          class="d-flex align-items-center column-gap-2 text-decoration-none view-all"
+          href="/collections/all"
+          class="btn btn-outline-dark fw-semibold px-4 py-2 rounded-pill"
         >
-          <p class="m-0">{{ section.settings.text | default: "Ver todos" }}</p>
-          <img width="auto" height="auto" src="{{ '4199.svg' | asset_url }}" class="icon">
+          {{ section.settings.text | default: "Ver todo el catálogo" }} &rarr;
         </a>
       </div>
     </div>
-    <div class="row custom-gy">
-      {% assign product_count = 0 %}
-      {% for product in target_coll.products limit: section.settings.quantity %}
-        {% assign product_count = product_count | plus: 1 %}
-        <div class="col-6 col-md-4 col-lg-3 mb-4">
+
+    <div class="row g-4">
+      {% assign total_items = 0 %}
+      {% for product in product_list limit: section.settings.quantity %}
+        {% assign total_items = total_items | plus: 1 %}
+        <div class="col-6 col-md-4 col-lg-3">
           {% render 'carma-product', product: product %}
         </div>
       {% endfor %}
 
-      {% if product_count == 0 %}
-        {% for product in collections.all.products limit: 8 %}
-          {% assign product_count = product_count | plus: 1 %}
-          <div class="col-6 col-md-4 col-lg-3 mb-4">
+      {% if total_items == 0 %}
+        {% comment %} Mostrar la colección global de la tienda si product_list vino vacia {% endcomment %}
+        {% for product in collections['all'].products limit: section.settings.quantity %}
+          {% assign total_items = total_items | plus: 1 %}
+          <div class="col-6 col-md-4 col-lg-3">
             {% render 'carma-product', product: product %}
           </div>
         {% endfor %}
       {% endif %}
 
-      {% if product_count == 0 %}
-        <div class="col-12 text-center py-4">
-          <p class="fs-5 text-muted">No hay productos disponibles en esta colección todavía.</p>
+      {% if total_items == 0 %}
+        <div class="col-12 text-center py-5">
+          <p class="fs-4 text-muted mb-3">Aún no se han publicado productos activos en la tienda.</p>
+          <p class="small text-muted">Asegúrate de que tus productos en el administrador estén configurados como <strong>Activo</strong> y asignados al canal de ventas <strong>Tienda online</strong>.</p>
         </div>
       {% endif %}
     </div>

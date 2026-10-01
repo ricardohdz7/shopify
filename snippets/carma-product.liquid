@@ -1,39 +1,45 @@
-<div class="carma-product-card d-flex flex-column justify-content-between">
-  <a href="{{ product.url }}" class="text-decoration-none text-black">
+<div class="carma-product-card d-flex flex-column justify-content-between h-100 p-3 border rounded-4 bg-white shadow-sm">
+  <a href="{{ product.url }}" class="text-decoration-none text-dark">
     <!-- Imagen principal del producto -->
-    <div class="carma-product-card__image">
-      <img
-        src="{{ product.featured_image | image_url }}"
-        alt="{{ product.title }}"
-        width="100%"
-        height="auto"
-        class="rounded-4"
-      >
+    <div class="carma-product-card__image text-center overflow-hidden rounded-4 mb-3" style="aspect-ratio: 1/1; background-color: #f8f9fa;">
+      {% if product.featured_image != blank %}
+        <img
+          src="{{ product.featured_image | image_url: width: 600 }}"
+          alt="{{ product.title | escape }}"
+          width="100%"
+          height="100%"
+          style="object-fit: cover; width: 100%; height: 100%;"
+          class="rounded-4 transition-transform"
+          loading="lazy"
+        >
+      {% else %}
+        {{ 'product-1' | placeholder_svg_tag: 'w-100 h-100 rounded-4' }}
+      {% endif %}
     </div>
 
-    <!-- Etiqueta del producto (primera etiqueta) -->
-    {% if product.vendor %}
-      <div class="carma-product-card__label mt-5">
+    <!-- Marca / Proveedor -->
+    {% if product.vendor != blank %}
+      <div class="carma-product-card__label text-uppercase text-muted small fw-semibold">
         {{ product.vendor }}
       </div>
     {% endif %}
 
     <!-- Título del producto -->
-    <div class="carma-product-card__title my-2">
+    <h3 class="carma-product-card__title h6 fw-bold my-2 text-truncate" title="{{ product.title | escape }}">
       {{ product.title }}
-    </div>
+    </h3>
 
     <!-- Precio del producto -->
-    <div class="carma-product-card__price mb-4">
+    <div class="carma-product-card__price mb-3 fs-5">
       {% if product.compare_at_price > product.price %}
-        <span class="carma-product-card__price--sale fw-bold">
+        <span class="carma-product-card__price--sale fw-bold text-danger">
           {{ product.price | money }}
         </span>
-        <span class="carma-product-card__price--compare text-muted text-decoration-line-through ms-2">
+        <span class="carma-product-card__price--compare text-muted text-decoration-line-through ms-2 small">
           {{ product.compare_at_price | money }}
         </span>
       {% else %}
-        <span class="carma-product-card__price--regular">
+        <span class="carma-product-card__price--regular fw-bold text-dark">
           {{ product.price | money }}
         </span>
       {% endif %}
@@ -45,9 +51,14 @@
     <input type="hidden" name="id" value="{{ product.variants.first.id }}">
     <button
       type="submit"
-      class="button-add-to-cart w-100"
+      class="btn btn-primary w-100 fw-bold py-2 rounded-3 shadow-sm"
+      {% unless product.available %}disabled{% endunless %}
     >
-      Añadir al carrito
+      {% if product.available %}
+        Añadir al carrito
+      {% else %}
+        Agotado
+      {% endif %}
     </button>
   </form>
 </div>
