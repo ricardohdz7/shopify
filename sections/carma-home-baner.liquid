@@ -33,52 +33,53 @@
 {% endschema %}
 <div class="swiper baner">
   <div class="swiper-wrapper">
-    {% assign active_slides = 0 %}
     {% for block in section.blocks %}
-      {% if block.settings.image != blank or block.settings.movil != blank %}
-        {% assign active_slides = active_slides | plus: 1 %}
-        <div class="swiper-slide" {{ block.shopify_attributes }}>
-          <a href="{{ block.settings.enlace | default: '#' }}">
-            <picture>
-              {%- if block.settings.movil != blank -%}
-                <source
-                  media="(max-width: 767px)"
-                  srcset="{{ block.settings.movil | image_url }}"
-                >
-              {%- endif -%}
-              {%- if block.settings.image != blank -%}
-                <img
-                  src="{{ block.settings.image | image_url }}"
-                  alt=""
-                  class="img-fluid"
-                  loading="lazy"
-                  width="100%"
-                  height="auto"
-                >
-              {%- elsif block.settings.movil != blank -%}
-                <img
-                  src="{{ block.settings.movil | image_url }}"
-                  alt=""
-                  class="img-fluid"
-                  loading="lazy"
-                  width="100%"
-                  height="auto"
-                >
-              {%- endif -%}
-            </picture>
-          </a>
-        </div>
-      {% endif %}
-    {% endfor %}
+      {% liquid
+        assign desktop_src = block.settings.image | image_url
+        if desktop_src contains 'no-image' or desktop_src == blank
+          assign fn = block.settings.image | split: '/' | last
+          if fn != blank
+            assign desktop_src = 'https://casamunozmedipedi.com/cdn/shop/files/' | append: fn
+          endif
+        endif
 
-    {% if active_slides == 0 %}
-      <div class="swiper-slide py-5 text-center bg-light">
-        <div class="p-5">
-          <h2 class="h4">Bienvenido a tu tienda Shopify</h2>
-          <p class="text-muted">Personaliza tus banners desde el editor de temas de Shopify.</p>
-        </div>
+        assign movil_src = block.settings.movil | image_url
+        if movil_src contains 'no-image' or movil_src == blank
+          assign fn_m = block.settings.movil | split: '/' | last
+          if fn_m != blank
+            assign movil_src = 'https://casamunozmedipedi.com/cdn/shop/files/' | append: fn_m
+          endif
+        endif
+      %}
+      <div class="swiper-slide" {{ block.shopify_attributes }}>
+        <a href="{{ block.settings.enlace | default: '#' }}">
+          <picture>
+            {% if movil_src != blank %}
+              <source media="(max-width: 767px)" srcset="{{ movil_src }}">
+            {% endif %}
+            {% if desktop_src != blank %}
+              <img
+                src="{{ desktop_src }}"
+                alt=""
+                class="img-fluid w-100"
+                loading="lazy"
+                width="100%"
+                height="auto"
+              >
+            {% elsif movil_src != blank %}
+              <img
+                src="{{ movil_src }}"
+                alt=""
+                class="img-fluid w-100"
+                loading="lazy"
+                width="100%"
+                height="auto"
+              >
+            {% endif %}
+          </picture>
+        </a>
       </div>
-    {% endif %}
+    {% endfor %}
   </div>
   <div class="swiper-button-next"></div>
   <div class="swiper-button-prev"></div>

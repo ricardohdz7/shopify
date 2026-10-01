@@ -47,9 +47,18 @@
   <div class="container">
     <div class="d-none d-lg-flex align-items-center justify-content-between flex-column flex-lg-row row-gap-3">
       {% for block in section.blocks %}
+        {% liquid
+          assign icon_src = block.settings.icon | image_url
+          if icon_src contains 'no-image' or icon_src == blank
+            assign fn = block.settings.icon | split: '/' | last
+            if fn != blank
+              assign icon_src = 'https://casamunozmedipedi.com/cdn/shop/files/' | append: fn
+            endif
+          endif
+        %}
         <div class="d-flex align-items-center column-gap-3">
-          {% if block.settings.icon != blank %}
-            <img width="auto" height="auto" src="{{ block.settings.icon | image_url }}" class="icon" alt="">
+          {% if icon_src != blank %}
+            <img width="auto" height="auto" src="{{ icon_src }}" class="icon" alt="">
           {% endif %}
           <p class="m-0">{{ block.settings.name }}</p>
         </div>
@@ -61,10 +70,19 @@
       <div class="swiper-wrapper">
         {% for i in (1..2) %}
           {% for block in section.blocks %}
+            {% liquid
+              assign icon_src = block.settings.icon | image_url
+              if icon_src contains 'no-image' or icon_src == blank
+                assign fn = block.settings.icon | split: '/' | last
+                if fn != blank
+                  assign icon_src = 'https://casamunozmedipedi.com/cdn/shop/files/' | append: fn
+                endif
+              endif
+            %}
             <div class="swiper-slide">
               <div class="d-flex align-items-center column-gap-3">
-                {% if block.settings.icon != blank %}
-                  <img width="auto" height="auto" src="{{ block.settings.icon | image_url }}" class="icon" alt="">
+                {% if icon_src != blank %}
+                  <img width="auto" height="auto" src="{{ icon_src }}" class="icon" alt="">
                 {% endif %}
                 <p class="m-0">{{ block.settings.name }}</p>
               </div>

@@ -26,7 +26,7 @@
       "type": "text",
       "id": "formtitle",
       "label": "Encabezado",
-      "default": "¿Cuáles son tu síntomas?"
+      "default": "¿Cuáles son tus síntomas?"
     },
     {
       "type": "text",
@@ -55,24 +55,33 @@
   ]
 }
 {% endschema %}
-<section class="encuentra-el-producto py-5" style="background-image:url('{{- section.settings.image | image_url -}}')">
+{% liquid
+  assign bg_src = section.settings.image | image_url
+  if bg_src contains 'no-image' or bg_src == blank
+    assign fn = section.settings.image | split: '/' | last
+    if fn != blank
+      assign bg_src = 'https://casamunozmedipedi.com/cdn/shop/files/' | append: fn
+    endif
+  endif
+%}
+<section class="encuentra-el-producto py-5" style="background-image:url('{{- bg_src -}}'); background-size: cover; background-position: center;">
   <div class="container my-5 py-lg-5">
     <div class="my-5 py-5">
       <h1 class="text-white text-center mb-5 pb-5">{{- section.settings.title -}}</h1>
       <div class="row justify-content-center">
         <div class="col-lg-6">
-          <div class="rounded bg-white p-5">
-            <div class="p-5">
-              <h3 class="text-center mb-5">{{- section.settings.formtitle -}}</h3>
+          <div class="rounded bg-white p-5 shadow-lg">
+            <div class="p-3">
+              <h3 class="text-center mb-4">{{- section.settings.formtitle -}}</h3>
               <form>
-                <select class="p-4 text-center mb-5" required>
-                  <option selected disabled value="">Seleccionar</option>
+                <select class="form-select form-select-lg p-3 text-center mb-4" required>
+                  <option selected disabled value="">Seleccionar síntoma</option>
                   {% for block in section.blocks %}
                     <option value="{{- block.settings.link -}}">{{- block.settings.title -}}</option>
                   {% endfor %}
                 </select>
-                <div class="pt-5">
-                  <button type="submit" class="p-3">{{- section.settings.button -}}</button>
+                <div>
+                  <button type="submit" class="btn btn-primary w-100 p-3 fw-bold">{{- section.settings.button | default: "Buscar productos" -}}</button>
                 </div>
               </form>
             </div>
@@ -85,14 +94,15 @@
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     const form = document.querySelector('.encuentra-el-producto form');
-    const select = form.querySelector('select');
-
-    form.addEventListener('submit', function (e) {
-      const value = select.value;
-      if (value) {
-        e.preventDefault();
-        window.location.href = value;
-      }
-    });
+    if (form) {
+      const select = form.querySelector('select');
+      form.addEventListener('submit', function (e) {
+        const value = select.value;
+        if (value) {
+          e.preventDefault();
+          window.location.href = value;
+        }
+      });
+    }
   });
 </script>

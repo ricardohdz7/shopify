@@ -1,32 +1,37 @@
+{% liquid
+  assign p_img = product.featured_image | image_url: width: 600
+  if p_img contains 'no-image' or p_img == blank or product.featured_image == blank
+    assign fn = product.featured_image | split: '/' | last
+    if fn != blank and fn contains '.'
+      assign p_img = 'https://casamunozmedipedi.com/cdn/shop/files/' | append: fn
+    else
+      assign p_img = 'https://casamunozmedipedi.com/cdn/shop/files/FOOTLOGIX_78ab060f-1e1e-4f21-a5bd-320175619779.png'
+    endif
+  endif
+%}
 <div class="carma-product-card d-flex flex-column justify-content-between h-100 p-3 border rounded-4 bg-white shadow-sm">
-  <a href="{{ product.url }}" class="text-decoration-none text-dark">
+  <a href="{{ product.url | default: '#' }}" class="text-decoration-none text-dark">
     <!-- Imagen principal del producto -->
-    <div class="carma-product-card__image text-center overflow-hidden rounded-4 mb-3" style="aspect-ratio: 1/1; background-color: #f8f9fa;">
-      {% if product.featured_image != blank %}
-        <img
-          src="{{ product.featured_image | image_url: width: 600 }}"
-          alt="{{ product.title | escape }}"
-          width="100%"
-          height="100%"
-          style="object-fit: cover; width: 100%; height: 100%;"
-          class="rounded-4 transition-transform"
-          loading="lazy"
-        >
-      {% else %}
-        {{ 'product-1' | placeholder_svg_tag: 'w-100 h-100 rounded-4' }}
-      {% endif %}
+    <div class="carma-product-card__image text-center overflow-hidden rounded-4 mb-3" style="aspect-ratio: 1/1; background-color: #ffffff;">
+      <img
+        src="{{ p_img }}"
+        alt="{{ product.title | default: 'Producto Casa Muñoz' | escape }}"
+        width="100%"
+        height="100%"
+        style="object-fit: contain; width: 100%; height: 100%;"
+        class="rounded-4 transition-transform"
+        loading="lazy"
+      >
     </div>
 
     <!-- Marca / Proveedor -->
-    {% if product.vendor != blank %}
-      <div class="carma-product-card__label text-uppercase text-muted small fw-semibold">
-        {{ product.vendor }}
-      </div>
-    {% endif %}
+    <div class="carma-product-card__label text-uppercase text-muted small fw-semibold">
+      {{ product.vendor | default: "Casa Muñoz" }}
+    </div>
 
     <!-- Título del producto -->
     <h3 class="carma-product-card__title h6 fw-bold my-2 text-truncate" title="{{ product.title | escape }}">
-      {{ product.title }}
+      {{ product.title | default: "Tratamiento Podológico Especializado" }}
     </h3>
 
     <!-- Precio del producto -->
@@ -40,7 +45,7 @@
         </span>
       {% else %}
         <span class="carma-product-card__price--regular fw-bold text-dark">
-          {{ product.price | money }}
+          {{ product.price | default: 2500 | money }}
         </span>
       {% endif %}
     </div>
@@ -48,17 +53,12 @@
 
   <!-- Botón de añadir al carrito -->
   <form method="post" action="{{ routes.cart_add_url }}">
-    <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+    <input type="hidden" name="id" value="{{ product.variants.first.id | default: 1 }}">
     <button
       type="submit"
       class="btn btn-primary w-100 fw-bold py-2 rounded-3 shadow-sm"
-      {% unless product.available %}disabled{% endunless %}
     >
-      {% if product.available %}
-        Añadir al carrito
-      {% else %}
-        Agotado
-      {% endif %}
+      Añadir al carrito
     </button>
   </form>
 </div>
