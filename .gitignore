@@ -1,7 +1,5 @@
 # Shopify CLI & config
 .shopify/
-config/settings_data.json
-# (Optional: remove config/settings_data.json if you want settings included; usually kept in theme repos, but we can keep it in git unless ignored. Let's include settings_data.json)
 
 # Zip archives
 *.zip
