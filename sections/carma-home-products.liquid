@@ -29,22 +29,26 @@
 {% endschema %}
 <section class="list-of-products py-5">
   <div class="py-5 my-5 container">
+    {% assign target_coll = collections[section.settings.collection] %}
+    {% if target_coll == blank or target_coll.products.size == 0 %}
+      {% assign target_coll = collections['all'] %}
+    {% endif %}
     <div class="row align-items-end mb-5 pb-3">
       <div class="col">
-        <h1 class="fw-semibold m-0">{{ section.settings.collection.title }}</h1>
+        <h1 class="fw-semibold m-0">{{ target_coll.title | default: "Productos" }}</h1>
       </div>
       <div class="col-auto">
         <a
-          href="{{ section.settings.collection.url }}"
+          href="{{ target_coll.url | default: '/collections/all' }}"
           class="d-flex align-items-center column-gap-2 text-decoration-none view-all"
         >
-          <p class="m-0">{{ section.settings.text }}</p>
+          <p class="m-0">{{ section.settings.text | default: "Ver todos" }}</p>
           <img width="auto" height="auto" src="{{ '4199.svg' | asset_url }}" class="icon">
         </a>
       </div>
     </div>
     <div class="row custom-gy">
-      {% for product in collections[section.settings.collection].products limit: section.settings.quantity %}
+      {% for product in target_coll.products limit: section.settings.quantity %}
         <div class="col-6 col-md-4 col-lg-3">
           {% render 'carma-product', product: product %}
         </div>
